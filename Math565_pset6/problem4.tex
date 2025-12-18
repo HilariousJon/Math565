@@ -1,0 +1,227 @@
+\begin{questions}
+    \begin{problem}
+        \label{pb_2}
+        A poset $P$ is \textbf{graded} (in the sense of the previous pset) if and only if we can assign an integer $\rho(x)$, called the rank, to each $x \in P$ so that if $x \lessdot y$ then $\rho(y) = \rho(x) + 1$. (You may assume this.)
+
+        Let $P$ be a finite graded poset with a $\hat{0}$ and $\hat{1}$. We say that $P$ is \textbf{Eulerian} if each interval $[s, t]$ where $s < t$ has the same number of elements with odd rank as elements with even rank.
+
+        \begin{enumerate}
+            \item[(a)] What do intervals of length 2 (that is, $[s, t]$ where $\rho(t) = \rho(s) + 2$) in Eulerian posets look like?
+        \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        Consider the following picture:
+        
+        \begin{center}
+        \begin{tikzpicture}[
+            % Style for the nodes (filled black circles)
+            node/.style={fill=black, circle, inner sep=2pt, text width=0pt},
+            % Style for the rank labels (placed to the right)
+            rank_label/.style={right=1.5cm of #1, anchor=west}
+        ]
+            % --- Place the 4 nodes ---
+            % Bottom node
+            \node (s)  [node, label=below:$s$] at (0, 0) {};
+            
+            % Two middle nodes
+            \node (m1) [node, label=left:$m_1$] at (-2, 1) {};
+            \node (m2) [node, label=right:$m_2$] at (2, 1) {};
+            
+            % Top node
+            \node (t)  [node, label=above:$t$] at (0, 2) {};
+            
+            % --- Draw the edges (covering relations) ---
+            \draw (s) -- (m1);
+            \draw (s) -- (m2);
+            \draw (m1) -- (t);
+            \draw (m2) -- (t);
+            
+            % --- Add the rank labels on the right ---
+            \node at (s)  [rank_label=s]  {Rank $\rho(s)$};
+            \node at (m2) [rank_label=m2] {Rank $\rho(s) + 1$};
+            \node at (t)  [rank_label=t]  {Rank $\rho(s) + 2$};
+        \end{tikzpicture}
+
+        \end{center}
+        An interval of length 2 means the ranks of its bottom and top elements differ by two, i.e., $\rho(t) = \rho(s) + 2$. The elements properly between $s$ and $t$ must all lie at the intermediate rank, $\rho(s) + 1$. Let $k$ be the number of these intermediate elements. The definition of an Eulerian poset states that the interval $[s, t]$ must have an equal number of elements with even rank and odd rank. Denote the elements in the interval $\{s, t\} \cup \{m_1, \dots, m_k\}$. If $\rho(s)$ is even, then $\rho(t)$ is also even, and all $k$ intermediate elements $m_i$ have odd rank. This gives 2 elements ($s, t$) with even rank and $k$ elements with odd rank. For the poset to be Eulerian, we must have $k = 2$. If $\rho(s)$ is odd, then $\rho(t)$ is also odd, and all $k$ intermediate elements have even rank. This gives 2 elements ($s, t$) with odd rank and $k$ elements with even rank, which again implies $k = 2$. Thus, any interval of length 2 in an Eulerian poset must contain exactly two elements at the middle rank, forming the diamond-shaped lattice shown in the figure.
+    \end{solution}
+    
+    \begin{problem}
+        Same setting as \textbf{Problem} \ref{pb_2}:
+        \begin{enumerate}
+            \item[(b)] Verify that the Boolean algebra $B_n$ is Eulerian.
+        \end{enumerate}
+        \label{bool_euler}
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            The posets of the Boolean Algebra $B_n$, denoted as $P(B_n)$, with the entries be all the subset of $[n]$, and $\hat{0} = \emptyset, \; \hat{1} = [n]$, and the partial order given by $\subseteq$. We want to see such poset is graded and Eulerian.
+            \begin{itemize}
+                \item \textbf{$\mathbf{P(B_n)}$ is graded:} Given $A, B \in P(B_n)$, with $A \subseteq B$. Given a maximal chain from $B$ to $A$, if the length of it is less than $|B\backslash A| + 1$, it means that there exists some $e \in B\backslash A$, such that it is not in any elements on such maximal chain by Pigeonhole Principle, thus we can extend the length of the chain by adding an element who is the union of $e$ and the element that is connected to $B$ on the chain and get a new chain, which contradict to maximality of the maximal chain $\lightning$. Now suppose that the length of the maximal chain is bigger than $|B\backslash A| + 1$, by Pigeonhole Principle, it exceeds the number of total elements of $|B\backslash A|$, thus cannot be a chain from $A$ to $B$ $\lightning$. So any maximal chain from $A$ to $B$ has same length, this shows that $P(B_n)$ is graded.
+                \item \textbf{$\mathbf{P(B_n)}$ is Eulerian:} Since $P(B_n)$ is graded, so we can assign rank function to the entries in $P(B_n)$, which define as the cardinality of the entry:
+                \[
+                \rho(X) = |X|
+                \]
+
+                Now given $[S,T]$ to be arbitrary interval in $P(B_n)$, see that $S\subseteq T$. There are four kinds of situation:
+                \begin{itemize}
+                    \item $\mathbf{S, T}$ \textbf{are both even numbers:} see that the cardinality difference is even in this case, suppose $|T| - |S| = 2k$ for some $k\in \mathbb Z$. Then:
+                    \[
+                    \begin{aligned}
+                        \text{\# elem. of even rank: }& \binom{2k}{0} + \binom{2k}{2} + \ldots + \binom{2k}{2k} \\
+                        \text{\# elem. of odd rank: }& \binom{2k}{1} + \binom{2k}{3} + \ldots+ \binom{2k}{2k-1}
+                    \end{aligned}
+                    \]
+                    \item $\mathbf{S, T}$ \textbf{are both odd numbers:} see that the cardinality difference is even in this case, suppose $|T|-|S| = 2k$ for some $k\in \mathbb Z$. Then:
+                    \[
+                    \begin{aligned}
+                        \text{\# elem. of odd rank: }& \binom{2k}{0} + \binom{2k}{2} + \ldots + \binom{2k}{2k} \\
+                        \text{\# elem. of even rank: }& \binom{2k}{1} + \binom{2k}{3} + \ldots+ \binom{2k}{2k-1}
+                    \end{aligned}
+                    \]
+                    \item $\mathbf{S}$ \textbf{is odd number,} $\mathbf T$ \textbf{is even number:} see that the cardinality difference is odd number this case, suppose $|T| - |S| = 2k+1$ for some $k\in\mathbb Z$. Then:
+                    \[
+                    \begin{aligned}
+                        \text{\# elem. of even rank: }& \binom{2k+1}{1} + \binom{2k+1}{3} + \ldots + \binom{2k+1}{2k+1} \\
+                        \text{\# elem. of odd rank: }& \binom{2k+1}{0} + \binom{2k+1}{2} + \ldots + \binom{2k+1}{2k} \\
+                    \end{aligned}
+                    \]
+                    \item $\mathbf S$ \textbf{is even number,} $\mathbf T$ \textbf{is odd number:} see that the cardinality difference is odd in this case, suppose $|T| - |S| = 2k + 1$ for some $k\in\mathbb Z$. Then:
+                    \[
+                    \begin{aligned}
+                        \text{\# elem. of odd rank: }& \binom{2k+1}{1} + \binom{2k+1}{3} + \ldots + \binom{2k+1}{2k+1} \\
+                        \text{\# elem. of even rank: }& \binom{2k+1}{0} + \binom{2k+1}{2} + \ldots + \binom{2k+1}{2k} \\
+                    \end{aligned}
+                    \]
+                \end{itemize}
+
+                It left to proof that for all $k\in \mathbb Z$, the following holds:
+                \begin{equation}    
+                    \binom{2k+1}{1} + \binom{2k+1}{3} + \ldots + \binom{2k+1}{2k+1} = \binom{2k+1}{0} + \binom{2k+1}{2} + \ldots + \binom{2k+1}{2k} 
+                \label{eq_1}
+                \end{equation}
+                \begin{equation}
+                    \binom{2k}{0} + \binom{2k}{2} + \ldots + \binom{2k}{2k} = \binom{2k}{1} + \binom{2k}{3} + \ldots+ \binom{2k}{2k-1} 
+                \label{eq_2}
+                \end{equation}
+
+                Consider the following function:
+                \[
+                \begin{aligned}
+                    f(x) &= (1+x)^{2k} \\
+                    &= \binom{2k}{0} + \binom{2k}{1}x + \ldots + \binom{2k}{2k}x^{2k} \\
+                    &= \sum_{i=0}^{2k} \binom{2k}{i}x^{i}
+                \end{aligned}
+                \]
+
+                Then consider the value of $f(-1)$:
+                \[
+                \begin{aligned}
+                    f(-1) &= (1-1)^{2k} = 0 \\
+                    &= \sum_{i=0}^{2k}\binom{2k}{i}(-1)^i \\
+                    \implies \sum_{i=0}^{2k}\binom{2k}{i}(-1)^i  &= 0 \\
+                    \iff  \binom{2k}{0} + \binom{2k}{2} + \ldots + \binom{2k}{2k} &= \binom{2k}{1} + \binom{2k}{3} + \ldots+ \binom{2k}{2k-1} 
+                \end{aligned}
+                \]
+
+                which proves \textbf{Equation} \ref{eq_2}. Similarly we consider:
+                \[
+                \begin{aligned}
+                    g(x) &= (1+x)^{2k+1} \\
+                    &= \binom{2k+1}{0} + \binom{2k+1}{1}x + \ldots + \binom{2k+1}{2k+1}x^{2k+1} \\
+                    &= \sum_{i=0}^{2k+1} \binom{2k+1}{i}x^{i}
+                \end{aligned}
+                \]
+
+                Then consider the value of $g(-1)$:
+                \[
+                \begin{aligned}
+                    g(-1) &= (1-1)^{2k+1} = 0 \\
+                    &= \sum_{i=0}^{2k+1}\binom{2k+1}{i}(-1)^i \\
+                    \implies \sum_{i=0}^{2k+1}\binom{2k+1}{i}(-1)^i  &= 0 \\
+                    \iff \binom{2k+1}{1} + \binom{2k+1}{3} + \ldots + \binom{2k+1}{2k+1} &= \binom{2k+1}{0} + \binom{2k+1}{2} + \ldots + \binom{2k+1}{2k}
+                \end{aligned}
+                \]
+
+                which proves \textbf{Equation} \ref{eq_1}. Thus we see in all the cases, there are same number of elements of odd rank as the elements with even rank in the interval, which shows that $P(B_n)$ is Eulerian.
+            \end{itemize}
+            So we see that the Boolean Algebra $B_n$ is Eulerian.
+        \end{proof}
+    \end{solution}
+
+    \begin{problem}
+        \label{bool_alg_mo}
+        Same setting as \textbf{Problem} \ref{pb_2}:
+        \begin{enumerate}
+            \item[(c)] Prove that a poset is Eulerian if and only if the Mobius function is given by $\mu(s, t) = (-1)^{\rho(t)-\rho(s)}$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            ($\implies$): Suppose that $P$ is a Eulerian poset. Notice that by definition of Eulerian, any interval of $P$ will also be Eulerian. Given a interval $[s,t]$ of $P$, since $P$ is Eulerian, we can assign rank function to it. We shall proceed the prove by induction on $\rho(t) - \rho(s)$ for arbitrary interval:
+            \begin{itemize}
+                \item \textbf{Base case}: when $\rho(t)-\rho(s) = 1$, there is only $2$ elements in the interval, easy to verify that $\mu(s,t) = (-1)^{\rho (t) - \rho(s)}$ in the case.
+                \item \textbf{Inductive case}: suppose that for any interval $[s',t']$ such that $1 \leq \rho(t') - \rho(s') < n$, we have $\mu(s',t') = (-1)^{\rho(t') - \rho(s')}$. Now consider the interval $[s,t]$, such that $\rho(s) - \rho(t) = n$. See that:
+                \[
+                    \mu(s,t) = - \sum_{s\leq z < t} \mu (s,z) \qquad s<t 
+                \]
+
+                Now apply the induction hypothesis, we have:
+                \[
+                \begin{aligned}
+                    \mu(s,t) &= - \sum_{s\leq z < t} (-1)^{\rho(z) - \rho(s)} \\
+                    &= - (-1)^{-\rho(s)} \sum_{s \leq z < t} (-1)^{\rho(z)} \\
+                \end{aligned}
+                \]
+
+                Since $[s,t]$ is Eulerian, there are same number of elements with odd rank as elements with even rank, see that:
+                \begin{equation}
+                \label{eq_3}
+                \sum_{s\leq z \leq t} (-1)^{\rho(z)} = 0
+                \end{equation}
+
+                which implies that:
+                \[
+                \begin{aligned}
+                    \sum_{s\leq z < t}(-1)^{\rho(z)} + (-1)^{\rho(t)} &= 0 \\
+                    \implies \sum_{s\leq z < t}(-1)^{\rho(z)} &= -(-1)^{\rho(t)} 
+                \end{aligned}
+                \]
+
+                So we see:
+                \[
+                \begin{aligned}
+                    \mu(s,t) &= - (-1)^{-\rho(s)} \sum_{s \leq z < t} (-1)^{\rho(z)} \\
+                    &= -(-1)^{-\rho(s)} \cdot -(-1)^{\rho(t)} \\
+                    &= (-1)^{\rho(s) - \rho(t)}
+                \end{aligned}
+                \]
+
+                which yields the inductive case.
+            \end{itemize}
+
+                ($\impliedby$): Given that for any interval $[s,t]$:
+                \[
+                \begin{aligned}
+                    \mu(s,t) &= (-1)^{\rho(t) - \rho(s)} \\
+                    &= - \sum_{s\leq z < t} \mu(s,z) \\
+                    \implies \sum_{s\leq z \leq t} \mu(s,z) &= 0 \\
+                \end{aligned}
+                \]
+
+                Since the Mobius function holds for any interval, we then see:
+                \[
+                \begin{aligned}
+                    \implies \sum_{s\leq z \leq t} (-1)^{\rho(z) - \rho(t)} &= 0 \\
+                    \iff (-1)^{-\rho(t)} \cdot \sum_{s\leq z \leq t} (-1)^{\rho(z)} &= 0 \\
+                    \iff \sum_{s\leq z \leq t} (-1)^{\rho(z)} &= 0
+                \end{aligned}
+                \]
+
+                which means that there are same number of elements with odd rank as elements with even rank with the interval $[s,t]$. Such holds for any interval in the poset, so such poset is Eulerian by definition.
+        \end{proof}
+    \end{solution}
+\end{questions}

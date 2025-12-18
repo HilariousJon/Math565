@@ -1,0 +1,59 @@
+\begin{questions}
+\begin{problem}
+A \textit{tournament} on $n$ vertices is an orientation of the edges of $K_n$. A \textit{transitive tournament} is a tournament such that the vertices can be numbered in such a way that $(i,j)$ is an edge if and only if $i < j$. Show that if $k \leq \log_2 n$, every tournament on $n$ vertices has a transitive subtournament on $k$ vertices.
+\end{problem}
+
+\begin{solution}
+    \begin{proof}
+        \textbf{Heuristic:} Arbitrarily choose a vertex $v \in K_n$, and we divide the rest of the vertices as the following two sets:
+
+        \[
+        \begin{aligned}
+            S_1 & = \{u \in V | (u, v) \in E \} \\
+            S_2 &= \{u \in V | (v,u) \in E \} \\
+        \end{aligned}
+        \]
+
+        \quad In other words, $S_1$ denotes the set of vertices that directly connected to $v$, and $S_2$ denotes the set of vertices that directly connected by $v$. Observe that:
+
+        \[
+            |S_1| + |S_2| = n -1
+        \]
+
+        \quad By \textbf{Pigeonhole Principle}, we have that either:
+        
+        \[
+            |S_1| \geq \frac{n-1}{2} \\
+        \]
+
+        \quad or:
+
+        \[
+            |S_2| \geq \frac{n-1}{2} \\
+        \]
+
+        \quad And we choose the set of points that attains larger cardinality, and proceed the algorithm. Each time of the iteration, the vertex we choose along with all the previous points chosen in each iteration is able to form a transitive subtournament since by definition of $S_1$ and $S_2$, all vertices in $S_1$ is able to be labeled with smaller number than $v$ and all vertices in $S_2$ is able to be labeled with larger number than $v$. Then, all we need to ensure is that if $k\leq \log_2 n$, the graph with $n$ vertices is guaranteed to iterate the following inequality for k times.
+
+        \[
+            S_{k-1} \geq \frac{S_k - 1}{ 2}\\
+        \]
+
+        \quad where $S_i$ is denoted as the biggest graph number that will ensure having a subtournament with $i$ vertices. With $S_k = n$, we want to see that $S_1 \geq 1$.
+
+        \[
+        \begin{aligned}
+            S_1 & \geq \frac{1}{2} S_2 - \frac{1}{2} \\
+            & \geq \frac{1}{4}S_3 - \frac{1}{4} - \frac{1}{2} \\
+            & \geq \frac{1}{8}S_4 - \frac{1}{8} - \frac{1}{4} - \frac{1}{2} \\
+            & \vdots \\
+            & \geq \frac{1}{2^{k-1}} S_k - 1 \\
+            & = \frac{n}{2^{k-1}} - 1\\
+            & = \frac{2n}{2^{\log_2 n}} - 1 \\
+            & = 2 - 1 = 1 \\
+        \end{aligned}
+        \]
+
+        \quad which is indeed the case that $S_1 \geq 1$, so the statement is proved.
+    \end{proof}
+\end{solution}
+\end{questions}

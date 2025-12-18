@@ -1,0 +1,230 @@
+\begin{questions}
+    \begin{problem}
+        Let $\mathcal{A}$ be the hyperplane arrangement in $\mathbb{R}^n$ consisting of all hyperplanes $x_i = x_j$ for $i \ne j$ and the hyperplanes $x_i = 0$ for $i = 1, 2, \ldots, n$. Prove that
+        
+        \[
+        \chi_{\mathcal{A}}(t) = (t - 1)(t - 2)(t - 3) \cdots (t - n)
+        \]
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+        We denote the hyperplane arrangement in $\mathbb R^n$ consisting of all hyperplanes $x_i = x_j$ for $i\neq j$ and the hyperplanes $x_i = 0$ for $i\in[n]$ as $\mathcal A^n$. And we define the hyperplanes of $\mathcal A^n$ as:
+        \[
+        \begin{aligned}
+        H_{i,j}^n &:= \{(x_1, \ldots, x_n) \in \mathbb R^n \; | \; x_i = x_j\} \\
+        H_i^n &:=  \{(x_1, \ldots, x_n) \in \mathbb R^n \; | \; x_i = 0\}
+        \end{aligned}
+        \]
+
+        We shall proceed the prove for:
+        \[
+        \chi_{\mathcal A^n} (t)= (t-1) (t-2) (t-3) \cdots (t-n)
+        \]
+
+        by induction on the dimension of the endian space $\mathbb R^n$.
+
+        \begin{itemize}
+            \item \textbf{Base case:} when $n=2$, we have the $L(\mathcal A^2)$ as follows:
+            \begin{center}
+                \begin{tikzpicture}[
+                    node distance=0.7cm and 0.7cm,
+                    every node/.style={font=\large}
+                  ]
+                  
+                  \node (min) at (0,0) {$\mathbb{R}^2$};
+                  
+                  % Rank 1
+                  \node (h1)  at (-4, 1.5) {$H_1^2$}; 
+                  \node (h2)  at (0, 1.5) {$H_2^2$};
+                  \node (h12) at (4, 1.5) {$H_{1,2}^2$};
+                  
+                  % Rank 2
+                  \node (max) at (0, 3) {$\{\mathbf{0}\}$}; 
+
+                  % edges of the lattice of hyperplane arrangment
+                  \draw (min) -- (h1);
+                  \draw (min) -- (h2);
+                  \draw (min) -- (h12);
+                  
+                  \draw (h1) -- (max);
+                  \draw (h2) -- (max);
+                  \draw (h12) -- (max);
+                \end{tikzpicture}
+            \end{center}
+
+            See that:
+            \[
+            \begin{aligned}
+                \mu(\mathbb R^2) &= 1 \\
+                \mu(H_1^2) &= - \mu(\mathbb R^2) = -1 \\ 
+                \mu(H_2^2) &= -1 \\
+                \mu(H_{1,2}^2) &= -1 \\
+                \implies \mu(\{0\}) &= -(\mu(\mathbb R^2) + \mu(H_1^2) + \mu(H_2^2) + \mu(H_{1,2}^2))\\ 
+                &= -(1+(-1)+(-1)+(-1)) = 2
+            \end{aligned}
+            \]
+
+            Then by:
+            \[
+            \begin{aligned}
+                \chi_{\mathcal A}(t) &= \sum_{X\in L(\mathcal A)} \mu(X) \cdot t^{\dim X} \\
+                \implies \chi_{\mathcal A^2}(t) &= t^2 -3t + 2 = (t-1)(t-2)
+            \end{aligned}
+            \]
+
+            which yields the base case.
+            \item \textbf{Inductive case:} Suppose that:
+            \[
+            \chi_{\mathcal A^{k}}(t) = (t-1)(t-2)\cdots (t-k) 
+            \]
+
+            for $k\geq 2$, now we consider $\mathcal  A^{k+1}$. We shall remove the hyperplanes $H_0 := H_{k+1}^{k+1}$, $H_1 := H^{k+1}_{1,k+1}, H_2 := H^{k+1}_{2,k+1} \ldots, H_k := H^{k+1}_{k,k+1}$ one by one in order, and denote the result hyperplane arrangement as $\mathcal A_k$. We will remove $k+1$ hyperplanes one by one in order in this case, and we will denote the hyperplane arrangement after the $i$-th removal by $\mathcal A_{i-1}$, for example, $\mathcal A^{k+1} \backslash H_{k+1}^{k+1} =: \mathcal A_0$ and $\mathcal A^{k+1} \backslash (H^{k+1}_{k+1} \cup \{H_{j,k+1}^{k+1} \; | \; j \in [i], \; i \leq k\}) =: \mathcal A_i$. Notice that we have:
+            \[
+            \begin{aligned}
+            \chi_{\mathcal A}(t) &= \chi_{\mathcal A'}(t) - \chi_{\mathcal A''}(t) \\
+            \implies \chi_{\mathcal A'}(t) &= \chi_{\mathcal A}(t) + \chi_{\mathcal A''} (t) \\
+            \end{aligned}
+            \]
+
+            By our removal idea, see that:
+            \begin{equation}
+            \begin{aligned}
+            \chi_{\mathcal A_k}(t) &= \chi_{\mathcal A^{k+1}}(t) + \sum_{i=0}^{k-1} \chi_{\mathcal A''_{i}}(t) + \chi_{(\mathcal A^{k+1})''} (t) \\
+            \implies \chi_{\mathcal A^{k+1}} (t) &= \chi_{\mathcal A_k}(t) - (\sum_{i=0}^{k-1} \chi_{\mathcal A''_{i}}(t) + \chi_{(\mathcal A^{k+1})''} (t))
+            \end{aligned}
+            \label{final_boss}
+            \end{equation}
+
+            where $(\mathcal A^{k+1})''$ denotes the hyperplane arrangement that is formed by contracting $H_0$ from $\mathcal A^{k+1}$, and $\mathcal A_i''$ denotes the hyperplane arrangement that is formed by contracting $H_{i+1}$ from $\mathcal A_i$. 
+            
+            We first \textbf{claim} that:
+            \begin{equation}
+            \begin{aligned}
+            \mathcal (A^{k+1})'' &\simeq \mathcal A^k \\
+            \mathcal A''_i &\simeq \mathcal A^k \qquad 0 \leq i \leq k - 1 \\
+            \end{aligned}
+            \label{claim}
+            \end{equation}
+
+            In particular, our claim means that contracting any of the $k+1$ hyperplanes involving $x_{k+1}$ results in an arrangement isomorphic to $\mathcal A^k$.
+
+            First consider $(\mathcal A^{k+1})''$ which is formed by contracting $H_0$ from $\mathcal A^{k+1}$. See that:
+            \[
+            H_0 = H_{k+1}^{k+1} = \{(x_1,\ldots,x_{k+1}) \in \mathbb R^{k+1} \; | \; x_{k+1} = 0\}
+            \]
+
+            after the contraction, the hyperplane of $(\mathcal A^{k+1})''$ can be grouped into the following three classes:
+            \[
+            \begin{aligned}
+                A&:= \{H_i^{k+1} \cap H_{k+1}^{k+1}\}_{i\in [k]} = \{\{x \; | \; x_i = x_{k+1} = 0\}\}_{i\in [k]} \\
+                B&:= \{H^{k+1}_{i,j} \cap H_{k+1}^{k+1}\}_{i,j\in [k], i\neq j} = \{\{x \; | \; x_{k+1} = 0, \; x_i = x_j\}\}_{i,j\in [k], i\neq j} \\
+                C&:= \{H^{k+1}_{i,k+1} \cap H_{k+1}^{k+1}\}_{i\in[k]} = \{\{{x \; | \; x_{k+1} = x_i = 0}\}\}_{i\in [k]} \\
+                \implies A&= C \\
+                \implies (\mathcal A^{k+1})'' &= A \sqcup B
+            \end{aligned}
+            \]
+
+            See that in this case $(\mathcal A^{k+1})''$ shares the same lattice structure as well as the dimension structure as $\mathcal A^{k}$ since we always have $x_{k+1} = 0$. In particular, we see $(\mathcal A^{k+1})'' \simeq \mathcal A^k$.
+
+            Then we consider $\mathcal A_i''$ which is formed by conrtacting $H_{i+1}$ from $\mathcal A_i$, where $\mathcal A_i = \mathcal A^{k+1} \backslash \{H_0, \ldots, H_i\}$. See that:
+            \[
+            H_{i} = H_{i,k+1}^{k+1} = \{(x_1,\ldots, x_{k+1}) \in \mathbb R^{k+1} \; | \; x_i = x_{k+1}\} \qquad i \in [k]
+            \]
+
+            after the contraction, the hyperplanes of $\mathcal A_i''$ can be grouped into the following five classes:
+            \[
+            \begin{aligned}
+            I &:= \{H_j \cap H_{i+1}\}_{j>i+1, i,j\in [k]} = \{\{x \; | \; x_j = x_{k+1} = x_{i+1}\}\}_{j>i+1, i,j \in [k]} \\
+            J &:= \{H_{i+1,j}^{k+1} \cap H_{i+1}\}_{j\neq i+1, i,j \in [k]} = \{\{x \; | \; x_j = x_{i+1} = x_{k+1}\}\}_{j \neq i+1, i,j \in [k]} \\
+            K&:= \{H_{j,l}^{k+1} \cap H_{i+1}\}_{j \neq l\neq i+1, i,j,l \in [k]} = \{\{x\;|\; x_j = x_l, x_{i+1} = x_{k+1}\}\}_{j\neq l\neq i+1, i,j,l\in [k]} \\
+            L&:= \{H_{j}^{k+1} \cap H_{i+1}\}_{j\neq i+1, j \in [k]} = \{\{x \; | \; x_j = 0, \; x_{i+1} = x_{n+1}\}\}_{j \neq i+1, j \in [k]} \\
+            O&:= \{H_{i+1}^{k+1} \cap H_{i+1}\} = \{\{x \; | \; x_{i+1} = x_{n+1} = 0\}\} \\
+            \implies I &\subseteq J \\
+            \implies \mathcal A_i'' &= J \sqcup K \sqcup L \sqcup O
+            \end{aligned}
+            \]
+
+            For $\mathcal A^k$, denote:
+            \[
+            \begin{aligned}
+            X &:= \{\{x \in \mathbb R^k \; | \; x_i = x_j, \; i \neq j, \; i,j \in [k]\}\} \\
+            Y &:= \{\{x \in \mathbb R^k \; | \; x_i = 0, \; i \in [k]\}\}
+            \end{aligned}
+            \]
+
+            by definition, see that:
+            \[
+            \mathcal A^{k} = X \sqcup Y
+            \]
+
+            Then notice that for $\mathcal A_i'' = J \sqcup K \sqcup L \sqcup O$, the condition of $x_{i+1} = x_{k+1}$ drops the dimension by 1, and further compare the indices and dimension, see that:
+            \[
+            \begin{aligned}
+                X &\simeq L \sqcup O \\
+                Y &\simeq J \sqcup K \\
+            \end{aligned}
+            \]
+
+            In particular, we then see that:
+            \[
+            \mathcal A^k \simeq \mathcal A''_i
+            \]
+
+            which yields our \textbf{Claim} \ref{claim}. Then by \textbf{Claim} \ref{claim} and the \textbf{Induction Hypothesis}, see that:
+            \begin{equation}
+            \begin{aligned}
+                \chi_{\mathcal A^k} (t) &=(t-1)(t-2)\cdots (t-k) \\
+                &= \chi_{\mathcal A_i''}(t) \qquad \forall \; 0 \leq i \leq k-1 \\
+                &= \chi_{(\mathcal A^{k+1})''} (t)
+            \end{aligned}
+            \label{eq_ind}
+            \end{equation}
+
+            We then \textbf{claim} that:
+            \begin{equation}
+            \label{ak_claim}
+                \chi_{\mathcal A_k} (t) = t(t-1)(t-2)\cdots(t-k)
+            \end{equation}
+
+            we write:
+            \[
+            \begin{aligned}
+            X' &:= \{\{x \in \mathbb R^{k+1} \; | \; x_i = x_j, \; i \neq j, \; i,j \in [k]\}\} \\
+            Y' &:= \{\{x \in \mathbb R^{k+1} \; | \; x_i = 0, \; i \in [k]\}\}
+            \end{aligned}
+            \]
+
+            and see that:
+            \[
+            \mathcal A_k = X' \sqcup Y'
+            \]
+
+            Notice that $L(\mathcal A^{k})$ and $L(\mathcal A_k)$ shares the same lattice structure, in particular $L(\mathcal A^k) \simeq L(\mathcal A_k)$, so they have the same Mobius function. However, deleting all hyperplanes involving $x_{k+1}$ leaves an arrangement equivalent to $\mathcal A^k \times \mathbb R$, in particular, every elements in $L(\mathcal  A_k)$ is exactly $1$ dimension bigger than the corresponding elements in $L(\mathcal A^k)$. By the fact that:
+            \[
+            \chi_{\mathcal A}(t) = \sum_{X \in L(\mathcal A)} \mu (X) \cdot t^{\dim X}
+            \]
+
+            see that also by our \textbf{Inductive Hypothesis}:
+            \begin{equation}
+            \chi_{\mathcal A_k}(t) = t \cdot \chi_{\mathcal A_k}(t) = t(t-1)(t-2)\cdots(t-k) \\
+            \label{block2}
+            \end{equation}
+
+            which yields our \textbf{Claim} \ref{ak_claim}.
+
+            Now by \textbf{Equation} \ref{final_boss}, \textbf{Equation} \ref{eq_ind} and \textbf{Equation} \ref{block2}:
+            \[
+            \begin{aligned}
+                \chi_{\mathcal A^{k+1}} (t) &= \chi_{\mathcal A_k}(t) - (\sum_{i=0}^{k-1} \chi_{\mathcal A''_{i}}(t) + \chi_{(\mathcal A^{k+1})''} (t)) \\
+                &= t(t-1)(t-2)\cdots(t-k) - [k\cdot (t-1)(t-2)\cdots (t-k) + (t-1)(t-2)\cdots (t-k)] \\
+                &= t(t-1)(t-2)\cdots(t-k) - (k+1)\cdot (t-1)(t-2)\cdots (t-k)\\
+                &= (t-1)(t-2)\cdots (t-k) (t-(k+1))
+            \end{aligned}
+            \]
+
+            which yields the inductive case.
+        \end{itemize}
+        \end{proof}
+    \end{solution}
+\end{questions}

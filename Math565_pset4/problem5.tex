@@ -1,0 +1,107 @@
+\begin{questions}
+    \begin{problem}
+        An affine plane is a pair $(X, \mathcal{L})$ of points and lines satisfying:
+        \begin{itemize}
+            \item \textbf{(A0)}: there exist 3 points not all on one line.
+            \item \textbf{(A1)}: any two points belong to a unique line.
+            \item \textbf{(A2)}: given a point $p$ not on a line $L$, there exists a unique $L'$ passing through $p$ such that $L \cap L' = \emptyset$.
+        \end{itemize}
+
+        Convince yourself that $\mathbb{R}^2$ is an affine plane.
+    \end{problem}
+    \begin{problem}
+        $(i):$ For any projective plane, show that one can construct an affine plane by removing one of the lines and all the points on it.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Given a projective plane $(X, \mathcal L)$, we arbitrarily remove one of the lines and all the points on it, we shall then verify that this gives us an affine plane, i.e. it will satisfy \textbf{(A0), (A1), (A2)} as above.
+            \begin{itemize}
+                \item Verify \textbf{(A0)}: Based on \textbf{(P0)} property of projective plane, we will have a $4$-element subset $F := \{p_1,p_2,p_3,p_4\} \subseteq X$, such that $|L \cap F| \leq 2, \; \forall L \in \mathcal L$. Since we remove one line, denote the removed line as $L_{\infty}$, we see that at most $2$ elements of $F$ will be removed. Without losing generality, we suppose that $p_3$ and $p_4$ will be removed. We now want to find another point $p_5$, such that $p_1, p_2, p_5$ are not all on one line. And we define $p_5 \in \overline{p_1p_3} \cap \overline{p_2p_4}$ with $|\overline{p_1p_3} \cap \overline{p_2p_4}| = 1$. First note that by the property of projective plane, we have $L_{\infty} = \overline{p_3 p_4}$, then we see that $p_5 \not \in L_{\infty} = \overline{p_3p_4}$, otherwise we will have $p_1,p_2,p_3,p_4$ both on $L_{\infty}$, contradict to the definition of $F$ $\lightning$. So $p_5$ will not be removed after the removal of $L_\infty$. Then we see that $p_1, p_2, p_5$ will not all on one line, otherwise we will have $p_1,p_2,p_5,p_3,p_4$ all on the same line, again contradict to the definition of $F$ $\lightning$. So we find $p_1,p_2,p_5$ in the affine plane, such that they are not all on one line. $\longrightarrow$ \textbf{OK!}
+                \item Verify \textbf{(A1)}: This property directly inherit from the fact that in a projective plane, for distinct point $x_1, x_2 \in X$, there exists a unique $L\in\mathcal L$, s.t. $x_1,x_2\in L$. $\longrightarrow$ \textbf{OK!}
+                \item Verify \textbf{(A2)}: Since in a projective plane, for distinct $L_1, L_2 \in \mathcal L, \; |L_1 \cap L_2| = 1$, we see that if we remove a whole line along with every point on that line, denote the removed line as $L_{\infty}$, every line will lose exactly one point. Now given a point $p$ not on a line $L$, with $L \neq L_{\infty}$, then suppose that $a\in L \cap L_{\infty}$, with $|L \cap L_\infty| = 1$, then after the removal of $L_{\infty}$, $a\not \in L$, so we have $\overline{pa} \cap L = \emptyset$, where before the removal of $L_{\infty}$, $\overline{pa} \cap L = \{a\}$. We then see if $\overline{pa}$ is the unique line that satisfy such property: Suppose that there exists another line $\overline{pb}$, such that $\overline{pb} \cap L = \emptyset$. Before the removal of $L_\infty$, we will have, say $\overline{pb} \cap L := \{c\}$, by the property of projective plane. By our assumption, we see $\overline{pb} \neq \overline{pa} \implies a \neq c$. Now after the removal, we have $\overline{pb} \cap L = \emptyset$, this means that $c \in L_\infty$, so we see that $a\in L_\infty, c\in L_\infty \implies \overline{ac} = L_\infty$. But we also have that $a\in L, c\in L \implies \overline{ac} =L \implies L = L_\infty$, contradict to the fact that $L \neq L_\infty$ $\lightning$. So this means that $a=c \implies \overline{pa} = \overline{pb}$, in particular we see $\overline{pa}$ is unique. $\longrightarrow$ \textbf{OK!}
+            \end{itemize}
+
+        \quad By verification on (A0), (A1), (A2), we see we construct an affine plane by removing arbitrary one lines and all points on the line of any projective plane. \textbf{Q.E.D.} 
+        \end{proof}
+    \end{solution}
+
+    \begin{problem}
+        (\textit{ii}): Prove that a finite affine plane has $n^2+n$ lines and $n^2$ points, for some integer $n$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Given a finite affine plane $(X, \mathcal L)$, we first claim that each point is contained in same number of lines. Given $x_1, x_2 \in X, x_1 \neq x_2$, then by (A2), there will be a unique line contain both $x_1, x_2$, denote as $\overline{x_1 x_2}$. Consider a line $L$ different from $\overline{x_1 x_2}$ that contain $x_1$, we see that $x_2 \not \in L$, otherwise $L = \overline{x_1 x_2}$. Then by (A2), there exists a unique line $L'$ that pass through $x_2$, such that $L\cap L' = \emptyset$, thus form a parity relation. We define $\mathcal L_1 := \{L \in \mathcal L \; | \; x_1 \in L\}$, $\mathcal L_2 := \{L \in \mathcal L \; | \; x_2 \in L\}$. By above reasoning, we will have a injective map from $\mathcal L_1$ to $\mathcal L_2$. And similarly, interchange the position of $x_1$ and $x_2$ in the above reasoning, we will also obtain a injective map from $\mathcal L_2$ to $\mathcal L_1$. And thus there exists a bijection between $\mathcal L_1$ and $\mathcal L_2$. In particular we see $|\mathcal L_1| = |\mathcal L_2|$, which proved our first claim. 
+            
+            \quad We then suppose that each point will be contained in $(n+1)$ number of lines, where $n$ be some integer. We then claim that any line will contain exactly $n$ points in this case. Given an arbitrary line $L \in \mathcal L$, we see that we can always find a point $p \not \in L$. By (A0), there exists $F:= \{p_1,p_2,p_3\} \subseteq X$, such that not all of them on one line, so at least one of the elements in $F$ will not be in $L$ and thus such case always hold. By (A2), there will be a unique $L'$ passing through $p$, such that $L \cap L
+            ' = \emptyset$. Previously, we have proven that there will be exactly $(n+1)$ lines passing through $p$, denote such lines set as $\mathcal L_3$. We then see that $L' \in \mathcal L_3, \; |\mathcal L_3| = n+1$. And since $L'$ is the only unique line that satisfy $L' \cap L = \emptyset$, this just means that:
+            \[
+            \forall L'' \in \mathcal L_3, L'' \neq L' \implies L'' \cap L \neq \emptyset \implies |L'' \cap L| \geq 1
+            \]
+
+            We want to see that actually $|L'' \cap L| = 1$ in such case. Suppose that there exists $\overline{pab} \in \mathcal L_3, \; \overline{pab} \neq L'$, s.t. $\{a,b\}\in \overline{pab} \cap L$ ($|\overline{pab} \cap L| > 1$), in particular, we have $a \in L, b \in L$ and $a\in \overline{pab}, b \in \overline{pab}$, by (A1), we see that $\overline{pab} = L \implies p \in L$, contradict to the setting that $p \not \in L$ $\lightning$. So we see $|L'' \cap L| = 1$, and by that $|\mathcal L_3 - \{L'\}| = n$, we see that the lines in $\mathcal L_3$ will induce $n$ distinct point on $L$. And there will be no other point, since if there is a point, say $a$, not induced by lines in $\mathcal L_3$, we can obtain a unique line $\overline{pa}$ by (A1), and $\overline{pa}$ will be in one of $\mathcal L_3$, so $a$ is still induced by lines in $\mathcal L_3$, leads to contradiction. So we see there will be exactly $n$ distinct point contained in $L$, which proved the claim.
+
+            \quad We then want to see that $|X| = n^2$. Given a line $L \in \mathcal L$, we can find a point $p$ that is not on $L$. We denote the $n$ points on $L$ by $a_1, \ldots, a_n$. Clearly, $p\not \in L = \{a_1,\ldots, a_n\}$, by (A1), we defined $L_i := \overline{px_i}$, and define $L_{n+1}$, such that $L_{n+1}$ to be the unique line, such that $L_{n+1} \cap L = \emptyset$. We see that:
+            \begin{equation}
+            \bigcup_{i = 1}^{n} L_i \cup L_{n+1} = X
+            \label{eq1}
+            \end{equation}
+
+            given that $\forall x\in X, \; p \neq x$, then we see $\overline{px}$ will be one of $L_1, \ldots, L_n, L_{n+1}$. We then want to count the number of $|\bigcup_{i = 1}^{n} L_i \cup L_{n+1}|$, with $|\bigcup_{i = 1}^{n} L_i| = n^2 - n + 1$ and $|L_{n+1}| = n$, then:
+            \[
+            \begin{aligned}
+                \implies |\bigcup_{i = 1}^{n} L_i \cup L_{n+1}| &= |\bigcup_{i = 1}^{n} L_i| + |L_{n+1}| - |\bigcup_{i = 1}^{n} L_i \cap L_{n+1}| \\
+                &= |\bigcup_{i = 1}^{n} L_i| + |L_{n+1}| - |\{p\}| \\
+                &= n^2-n+1+n-1 = n^2\\
+                \implies |X| &= n^2
+            \end{aligned}
+            \]
+
+            \quad We then want to see that $|\mathcal L| = n^2 + n$. Given $L_1, L_2 \in \mathcal L$, we say that $L_1 \parallel L_2$ iff either $L_1 = L_2$ or $L_1 \cap L_2 = \emptyset$. We then want to see that $\parallel$ is a equivalence relation:
+            \begin{itemize}
+                \item $\boldsymbol{\parallel}$ \textbf{is reflexive}: Clearly we see that $L_1 = L_1 \implies L_1 \parallel L_1$.
+                \item $\boldsymbol{\parallel}$ \textbf{is symmetric}: Given $L_1 \parallel L_2$, either $L_1 = L_2 \iff L_2 = L_1$, or $L_1 \cap L_2 = \emptyset \iff L_2 \cap L_1 = \emptyset$, which implies that $L_2 \parallel L_1$.
+                \item $\boldsymbol{\parallel}$ \textbf{is transitive}: Suppose that $L_1 \parallel L_2$ and $L_2 \parallel L_3$, then there are four kinds of possibilities:
+                \begin{enumerate}
+                    \item $L_1 = L_2$ and $L_2 = L_3 \implies L_1 = L_3 \implies L_1 \parallel L_3$.
+                    \item $L_1 = L_2$ and $L_2 \cap L_3 = \emptyset \implies L_1 \cap L_3 = \emptyset \implies L_1 \parallel L_3$.
+                    \item $L_1 \cap L_2 = \emptyset$ and $L_2 = L_3 \implies L_1 \cap L_2 = \emptyset \implies L_1 \parallel L_3$.
+                    \item $L_1 \cap L_2 = \emptyset$ and $L_2 \cap L_3 = \emptyset$. Suppose that $L_1 \nparallel L_3$, then it means that $L_1 \cap L_3 \neq \emptyset$. Let $p \in L_1 \cap L_3$, lets consider the relationship between $L_2$ and $p$: if $p \in L_2$, we see that since $p\in L_1 \implies p\in L_1 \cap L_2 \implies L_1 \cap L_2 \neq \emptyset$, contradict to the fact that $L_1 \parallel L_2$ $\lightning$. So we see that $p\not \in L_2$. Then by (A2), we see that actually $L_1 = L_3 \implies L_1 \parallel L_3$, leads to contradiction $\lightning$. So we see that $L_1 \parallel L_3$.
+                \end{enumerate}
+            \end{itemize}
+            Thus we see that $\parallel$ is a equivalence relation, so it induce a partition on $\mathcal L$. We now want to investigate how many classes are there such partition, and how many lines are contained in each classes. We first arbitrarily pick a point $p \in X$, we've seen before, there will be exactly $(n+1)$ lines passing through $p$, denote them as $l_1, \ldots, l_{n+1}$. Now since $p \in l_i \cap l_j \implies l_i \cap l_j \neq \emptyset, \; \forall \; i,j \in [1,n+1] \cap \mathbb Z, \; i\neq j$, we see each $l_i$ belongs to different equivalence classes, and thus there will be at least $n+1$ equivalence classes. Now given an arbitrary line $\overline{l} \in \mathcal L$, if $p \in \overline{l}$, then $\overline{l}$ will be one of $l_i$, if $p \not \in \overline{l}$, then by (A2), there exists a unique line $l_p$ passing through $p$, such that $l_p \cap \overline{l} = \emptyset \implies$ $l_p$ and $\overline{l}$ will be in the same equivalence classes, and $l_p$ in this case will be one of $l_i$ and thus will be in one of the $(n+1)$ equivalence classes, so we see here are exactly $(n+1)$ equivalence classes in $\mathcal L$. We then arbitrarily pick a equivalence class, denote it as $\mathcal C$. We see that by (A0), not every lines are parallel to each other, so we can find $l_{\mathcal C} \not \in \mathcal C$. By definition of $\parallel$, we see $\forall \; l \in \mathcal C, \; l \cap l_{\mathcal C} \neq \emptyset$. Since we know that there are exactly $n$ points on $l_{\mathcal C}$, we denote such points as $q_1, \ldots, q_n$. For each $q_i$, by (A2), there will be a unique line passing through $q_i$, that is parallel to some line in $\mathcal C$, and thus such line will be also in $\mathcal C$. So we can construct $n$ lines in this way, all of them in $\mathcal C$, denote as $L_1', \ldots, L_n'$. Note that all of them are distinct: if $L_i' = L_j'\; (i\neq j)$, we see that $q_i, q_j \in L_i' = L_j' \implies L_i' = L_j' = l_{\mathcal C}$, but $l_{\mathcal C} \not \in \mathcal C$. So we see $|\mathcal C| \geq n$. Suppose there are another line $l_{\mathcal C}' \in \mathcal C$, it will also intersect with $l_{\mathcal C}$ by definition. But we see that there are only $n$ points on $l_{\mathcal C}$, and they already induced $L_1', \ldots, L_n'$, leading to $l'_{\mathcal C}$ will be one of $L_1', \ldots, L_n'$. So we see $|\mathcal C| = n$. Such arguments works for any equivalence classes, so we see:
+            \[
+            \mathcal L = (n+1)|\mathcal C| = n^2 + n
+            \]
+
+            \quad Above reasoning holds for any finite affine plane, so we see a finite affine plane has $n^2+n$ lines and $n^2$ points, for some integer $n$. \textbf{Q.E.D.}
+            
+            \textbf{Another proof idea about showing $\mathbf{|\boldsymbol{\mathcal L}| = n^2 + n}$}
+            
+            \quad We want to see that $|\mathcal L| = n^2 + n$. Given $L \in \mathcal L$, we can find a point $p \not \in L$, and thus obtain a unique line $L'$ passing through $p$, such that $L' \cap L = \emptyset$. We can then denote points on $L$ as $\alpha_1, \ldots, \alpha_n$, and points on $L'$ as $\beta_1, \ldots, \beta_n$. Thus we can then obtain $n^2$ distinct lines, defined by $\overline{\alpha_i\beta_j}, \; \forall \; i,j \in [1,n] \cap \mathbb Z$, which are also different from $L, L'$ by (A1). Then we pick one of those $n^2$ lines, say $\overline{\alpha_1\beta_1}$, there will be another $n-2$ points $\zeta_1, \ldots, \zeta_{n-2}$ on it, which are different from $\alpha_1, \beta_1$. Each of them will induced a unique line passing through it, such that its intersection with $L$ will be $\emptyset$. We denote such $(n-2)$ lines as $l_1, \ldots, l_{n-2}$. See that by (A1) and (A2), all of these lines will be different from each other and different from $L$ and $L'$, and we define $\mathcal L_4 := \{l_1, \ldots, l_{n-1}\}$. We want to see that:
+            \[
+            \mathcal L = \mathcal L_4 \sqcup \{L, L'\} \sqcup \{\overline{\alpha_i\beta_j} \; | \; \forall i,j \in [1,n] \cap \mathbb Z\} =: \mathcal L'
+            \]
+
+            Given arbitrary $l \in \mathcal L$. If $l \cap L \neq \emptyset$, without losing generality, we suppose $l \cap L = \{\alpha_1\}$ in this case. Since there are already $(n+1)$ lines passing through $\alpha_1$, which are $L, \overline{\alpha_1\beta_1}, \ldots, \overline{\alpha_1\beta_n}$, so $l$ must be one of them. In particular $l \in \{L, L'\} \sqcup \{\overline{\alpha_i\beta_j} \; | \; \forall i,j \in [1,n] \cap \mathbb Z\} \implies l \in \mathcal L'$. If $l \cap L = \emptyset$, one can immediately observe that $\alpha_1, \ldots, \alpha_n \not \in l$. If $b_j \in l$ for some $j\in [1,n] \cap \mathbb Z$, then we immediately see that $L' = l$, since we already see that $L'$ will be the only line passing through any $b_j$ whose intersection with $L$ is $\emptyset$ by our previous construction. So when $l \neq L'$, we also see $\beta_1, \ldots, \beta_n \not \in l$. We then note that $|\overline{\alpha_i \beta_j} \cap l| \leq 1, \; \forall i,j \in [1,n] \cap \mathbb Z$, otherwise, by (A1), we will have $l = \overline{\alpha_i\beta_j}$ for some $i,j \in [1,n] \cap \mathbb Z$, which implies that $l \cap L \neq \emptyset$, leading to contradiction $\lightning$. So we have $|\overline{\alpha_i \beta_j} \cap l| \leq 1, \; \forall i,j \in [1,n] \cap \mathbb Z$. As we have proven before in \textbf{Equation} \ref{eq1}, we see that $X = \bigcup_{i=1}^{n}\overline{\alpha_i \beta_1} \cup L' \implies l \subseteq \bigcup_{i=1}^{n}\overline{\alpha_i \beta_1}$. By (A1), $\bigcap_{i=1}^{n} \overline{\alpha_i \beta_1} = \{\beta_1\}$, thus we see:
+            \[
+            \begin{aligned}
+                \bigcup_{i=i}^{n} \overline{\alpha_i \beta_1} &= \{\alpha_1,\ldots, \alpha_n\} \sqcup \{\beta_1\} \sqcup \bigsqcup_{i=1}^{n}(\overline{\alpha_i \beta_1}- \{\alpha_i, \beta_1\})) \\
+                \implies \bigcup_{i=i}^{n} \overline{\alpha_i \beta_1} - (\{\alpha_1,\ldots, \alpha_n\} \sqcup \{\beta_1\}) &= \bigsqcup_{i=1}^{n}(\overline{\alpha_i \beta_1}- \{\alpha_i, \beta_1\})) \\
+                \implies |\bigsqcup_{i=1}^{n}(\overline{\alpha_i \beta_1}- \{\alpha_i, \beta_1\}))| &= n(n-2)
+            \end{aligned}
+            \]
+
+            Since $\beta_1, \alpha_i \not \in l, \; \forall \; i$, we see $|(\overline{\alpha_i \beta_1} - \{\alpha_i, \beta_1\}) \cap l| \leq 1$ and $l \subseteq \bigsqcup_{i=1}^{n}(\overline{\alpha_i \beta_1}- \{\alpha_i, \beta_1\}))$. Since $|l| = n, \; |\bigsqcup_{i=1}^{n}(\overline{\alpha_i \beta_1}- \{\alpha_i, \beta_1\}))| = n(n-2)$, by \textbf{Pigeonhole Principle}, we see $|(\overline{\alpha_i \beta_1} - \{\alpha_i, \beta_1\}) \cap l| = 1$, which implies that $|(\overline{\alpha_1 \beta_1} - \{\alpha_i, \beta_1\}) \cap l| = 1 \iff \zeta_i \in l \text{ for some $i \in [1,n-2] \cap \mathbb Z$}$, which means that $l \in \mathcal L_4 \implies l \in \mathcal L'$. So we see that $\mathcal L \subseteq \mathcal L'$, but obviously we shall have $\mathcal L' \subseteq \mathcal L$, so we see that $\mathcal L = \mathcal L'$. Then:
+            \[
+            \begin{aligned}
+                |\mathcal L'| &= |\mathcal L_4 \sqcup \{L, L'\} \sqcup \{\overline{\alpha_i\beta_j} \; | \; \forall i,j \in [1,n] \cap \mathbb Z\}| \\
+                &= (n-2) + 2 + n^2 \\
+                &= n^2 +n \\
+                \implies |\mathcal L| &= n^2 + n \\
+            \end{aligned}
+            \]
+        \end{proof}
+    \end{solution}
+\end{questions}

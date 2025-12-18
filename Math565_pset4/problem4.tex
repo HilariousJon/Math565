@@ -1,0 +1,11 @@
+\begin{questions}
+    \begin{problem}
+        Let $(X, \mathcal L)$ be a projective plane of order $n$. Suppose we are given a set of points $A \subseteq X$ such that no $3$ points in $A$ lie on a common line. Prove that $|A| \leq n + 2$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Given a point set $A \subseteq X$ such that no 3 points in $A$ lie on a common line. Suppose that $|A| > n+2$, we want to see that there will always have 3 points lie on a common line and thus leads to contradiction. In particular we only consider the case where $|A| = n+3$, since if every $|A| = n+3$ will always contain $3$ points lie on a common line, then any point set with bigger cardinality will also have. Let's arbitrarily choose $a\in A$, and then arbitrarily pick $n+1$ points that is different from $a$ from $A$, and connect them with $a$, and we thus obtain $(n+1)$ lines, since any two distinct point will fix a unique line in a finite projective plane. In particular we see all of these $(n+1)$ lines will contain $a$. Since $(X, \mathcal L)$ is a finite projective plane of order $n$, we see any point will contained in exactly $n+1$ number of lines. And we see the $(n+1)$ lines we just constructed will be exactly all the lines that contain $a$. Now consider the remaining one point $b \in A$, we connect it with $a$, and thus obtain a line. By Pigeonhole Principle, it has to be one of the $(n+1)$ lines we constructed just now. And this leads to that $a$, $b$, and the point we used to constructed the line that agree with $\overline{ab}$ we be on the common line, which leads to contradiction that $A$ will have no 3 points lie on a common line $\lightning$. So we see $|A| \leq n+2$. \textbf{Q.E.D.}
+        \end{proof}
+    \end{solution}
+\end{questions}

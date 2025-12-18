@@ -1,0 +1,62 @@
+\begin{questions}
+    \begin{problem}
+        A collection $\mathcal{M}$ of $k$-element subsets of $[n]$, satisfies the \textbf{exchange axiom} if: given $I, J \in \mathcal{M}$ and $i \in I$, there exists $j \in J$ such that $(I - \{i\} \cup \{j\}) \in \mathcal{M}$. (Thus $\mathcal{M}$ is the bases of a matroid.)
+
+        Suppose $\mathcal{M}$ satisfies the exchange axiom. Show that $\mathcal{M}$ satisfies the \textbf{dual exchange axiom}: if $I, J \in \mathcal{M}$ and $j \in J$ there exists $i \in I$ such that $(I - \{i\} \cup \{j\}) \in \mathcal{M}$.
+    \end{problem}
+
+    \begin{solution}
+    We state the following definition and shall prove the following lemma one by one:
+    \begin{definition}
+        A circuit is a subset $S\subseteq [n]$ that is dependent (= not independent), and minimal under inclusion. And we define:
+        \[
+        \begin{aligned}
+            \mathcal C &:= \{C \subseteq [n] \; | \; C \text{ is a circuit for } \mathcal M\} \\
+            \mathcal I &:= \{I \subseteq [n] \; | \; I \text{ is an independent set for } \mathcal M\}
+        \end{aligned}
+        \]
+    \end{definition}
+    \begin{lemma}
+        If $I_1$ and $I_2$ are in $\mathcal I$ and $|I_1| < |I_2|$, then there is an element $e$ of $I_2\backslash I_1$, such that $I_1 \cup e \in \mathcal I$.
+        \label{lem_4}
+    \end{lemma}
+    \begin{lemma}
+        Given $\mathcal C$ to be the set containing all the circuits for $\mathcal M$.
+        \begin{itemize}
+            \item If $C_1$ and $C_2$ are members of $\mathcal C$ and $C_1 \subseteq C_2$, then $C_1 = C_2$.
+            \item Furthermore, if $C_1$ and $C_2$ are distinct members of $\mathcal C$ and $e\in C_1 \cap C_2$, then there is a member $C_3$ of $\mathcal C$, such that $C_3 \subseteq (C_1 \cup C_2) \backslash \{e\}$.
+        \end{itemize}
+        \label{lem_5}
+    \end{lemma}
+    \begin{lemma}
+        Suppose that $I$ s an independent set in a matroid $\mathcal M$ and $e$ is an element of the ground set of $\mathcal M$ such that $I \cup \{e\}$ is dependent. Then $\mathcal M$ has a unique circuit contained in $I \cup \{e\}$, and this circuit contains $e$. 
+        \label{lem_6}
+    \end{lemma}
+
+    \textbf{Proof of the first Lemma} \ref{lem_4}:
+    \begin{proof}
+        Given $I_1$ and $I_2 \in \mathcal I$, with $|I_1| < |I_2|$. By definition of independent set, there exists $\mathcal B_1, \mathcal B_2 \in \mathcal M$, such that $I_1 \subseteq \mathcal B_1$ and $I_2 \subseteq \mathcal B_2$. We first try to exchange iteratively the elements in $\mathcal B_2 \backslash I_2$ into elements of $I_1$: By exchange axiom, for $b \in \mathcal B_2 \backslash I_2$, there exists $a \in \mathcal B_1$, such that $(\mathcal B_2 - \{a\}) \cup \{b\} \in \mathcal M$, evidently, $b\not\in I_1 \cap I_2$. We iteratively doing this for all elements in $\mathcal B_2\backslash I_2$, and get $\mathcal B'_2 \in \mathcal M$, with the result that $\mathcal B'_2 \backslash I_2 \subseteq \mathcal B_1$, and in particular, $\mathcal B_2' = (\mathcal B_2'\backslash I_2) \sqcup I_2$, and evidently, $(\mathcal B_2' \backslash I_2) \cap (I_1 \cap I_2) = \emptyset$. Now we apply exchange axiom for $\mathcal B_1$ and $\mathcal B_2'$. Since $|I_1| < |I_2|$ and $|\mathcal B_1| = |\mathcal B_2| \implies |\mathcal B_1 \backslash I_1| > |\mathcal B_2' \backslash I_2|$ and $\mathcal B_2' \backslash I_2 \subseteq \mathcal B_1$, by \textbf{Pigeonhole Principle}, there exists $i \in \mathcal B_1 \backslash I_1$, such that $i\not \in \mathcal B_2'\backslash I_2$. We apply exchange axiom to such element $i \in \mathcal B_1$: $i$ can not exchange element $j\in \mathcal B_2'\backslash I_2$ since they are already in $\mathcal B_1$, $i$ can not exchange element $j \in I_1 \cap I_2$ since $I_1 \cap I_2 \subseteq I_1 \subseteq \mathcal B_1$. So $i$ can only exchange element  $e\in I_2 - I_1$, and get $\mathcal B_1' \in \mathcal M$, evidently $e\not \in I_1$. And we see $I_1 \cup \{e\} \subseteq \mathcal B_1' \in \mathcal M \implies I_1 \cup \{e\} \in \mathcal I$.
+    \end{proof}
+    \textbf{Proof of the second Lemma} \ref{lem_5}:
+    \begin{proof}
+        Given $C_1, C_2 \in \mathcal C, \; C_1 \subseteq C_2$, then $\forall \; x \in C_2 - C_1$, by definition of circuits, see that $C_2\backslash \{x\}$ is independent since $C_2$ is the maximal dependent set. But since $x \not \in C_1 \implies C_1 \subseteq C_2 \backslash\{x\}$, right hand side is independent while the left hand side is dependent, leading to a contradiction $\lightning$. So $C_2 \backslash C_1 = \emptyset \implies C_1 = C_2$.
+
+        \quad Let $C_1, C_2, e$ be as the setting in \textbf{Lemma} \ref{lem_5}. Suppose that $(C_1 \cup C_2)\backslash \{e\}$ does not contain any circuit. Then see that $(C_1 \cup C_2) \backslash \{e\}$ is an independent set. Since $C_1$, $C_2$ are distinct, by what we proven just now in the same Lemma, we see $C_2 - C_1$ is non-empty, so we can choose an element $f$ from this set. As $C_2$ is a minimal dependent set, $C_2 \backslash \{f\} \in \mathcal I$. Now choose a subset $I$ of $C_1 \cup C_2$ which is maximal with the properties that it contains $C_2 \backslash \{f\}$ and it is independent. Evidently, see that $f \not \in I$. Moreover, as $C_1$ is a circuit, some element $g \in C_1$ is not in $I$. As $f\in C_2 - C_1$, see that $f \neq g$. Hence we have:
+        \[
+        |I| \leq |(C_1 \cup C_2) - \{f,h\}| = |(C_1 \cup C_2)| - 2 < |(C_1 \cup C_2)\backslash \{e\}|
+        \]
+
+        Now apply \textbf{Lemma} \ref{lem_4}, taking $I_1$ and $I_2$ to be $I$ and $(C_1 \cup C_2) \backslash \{e\}$ respectively. The resulting independent set will be $I\cup \{e\} \in \mathcal I$, contradicting to the maximality of $I$ $\lightning$.
+    \end{proof}
+    \textbf{Proof of the third Lemma} \ref{lem_6}:
+    \begin{proof}
+        Clearly $I\cup \{e\}$ contains a circuit, and all such circuits must contain $e$. Let $C$ and $C'$ be distinct such circuits. Then by \textbf{Lemma} \ref{lem_5}, we see $(C \cup C') \backslash \{e\}$ contains a circuit. As $(C \cup C') \backslash \{e\} \subseteq I \implies (C\cup C')\backslash \{e\} \in \mathcal I$, thus cannot contain any dependent subset and in particular does not contain any circuit, which is a contradiction $\lightning$. So $C$ is unique.
+    \end{proof}
+    \textbf{Proof of the Original Statement}:
+    \begin{proof}
+        First note that exchange axiom $\implies$ \textbf{Lemma} \ref{lem_4} $\implies$ \textbf{Lemma} \ref{lem_5} $\implies$ \textbf{Lemma} \ref{lem_6}.
+        
+        Given $I, J \in \mathcal M$, given $j\in J$, since $I \in \mathcal I$ and $I \cup \{j\}$ is dependent, thus by \textbf{Lemma} \ref{lem_6}, $I\cup \{j\}$ contains a unique circuit, denoted as $C(j,I)$. As $C(j,I)$ is dependent and $J$ is independent, see that $C(j,I) - J$ is non-empty. Let $i \in (C(j,I) - J)$. Evidently we see that $i \in I \cup \{j\}, i \neq j \implies i \in (I-J)$. Moreover, $(I - \{i\}) \cup \{j\}$ is independent since it does not contain $C(j,I)$, which is the only possible circuit that can be contained in any subset of $I \cup \{j\} \implies C(j,I) \not \subseteq (I - \{i\}) \cup \{j\}$. And since $|(I-\{i\}) \cup \{j\}| = |I|$, so it follows that $(I-\{i\}) \cup \{j\} \in \mathcal M$. In particular, we have proven $\forall \; I, J \in \mathcal M$, $\forall \; j \in J - I$, there exists an element $i \in I-J$, such that $(I - \{i\}) \cup \{j\} \in \mathcal M$, which implies the \textbf{dual exchange axiom}.
+    \end{proof}
+    \end{solution}
+\end{questions}

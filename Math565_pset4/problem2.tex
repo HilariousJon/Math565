@@ -1,0 +1,11 @@
+\begin{questions}
+    \begin{problem}
+        Suppose that $A$ is a symmetric Latin square of order $n$ such that every symbol appears on the main diagonal. Prove that $n$ is odd.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Since $A$ is a Latin square with order $n$, every symbol of this Latin square should appear $n$ times. Given arbitrary a symbol of $A$, denote as $a$. Since every symbol should appears on the main diagonal, so every symbol will appear exactly once at the diagonal since we have in total $n$ number of symbols. Then consider the situation of $a$ appearing at the non-diagonal position: Since it is a symmetric Latin square, we see that such $a$ should always in pair, in particular, if it appears at $A(i,j)$ for some $i,j\in [1,n], i\neq j$, it will definitely appear at $A(j,i)$. Since it appears in pair at the non-diagonal position, it will appear even times at non-diagonal position. So it will appear in odd times in the whole Latin square, given the fact that total number of appearing times equals to times of appearing in diagonal position plus times of appearing at non-diagonal position. Then we see that $n$ is equal to the total number of appearing times and thus $n$ is odd. \textbf{Q.E.D.}
+        \end{proof}
+    \end{solution}
+\end{questions}

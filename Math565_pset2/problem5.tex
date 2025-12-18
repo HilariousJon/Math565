@@ -1,0 +1,204 @@
+\begin{questions}
+\begin{problem}
+Find the chromatic polynomial of the $n$-cycle $C_n$ for $n\geq 3$. Find the chromatic polynomial of the $n$-wheel $W_n$ (this is the graph obtained from $C_n$ by adding a
+new vertex and joining it to all vertices of $C_n$).
+\end{problem}
+
+\begin{solution}
+Before we proceed our solution, we first proof two lemmas stated as follows:
+
+\begin{lemma}
+Given a graph $G=(V,E)$, and given $e\in E$, if $e$ is not a loop, then its chromatic polynomial satisfy that:
+\[
+    \chi_G (k) = \chi_{G'_e} (k) - \chi_{G''_e}(k) \\
+\]
+where $G'_e$ denotes the graph induced by $G$ deleting the edge $e$, and $G''_e$ denotes the graph induced by $G$ contracting the edge $e$.
+\label{lem1}
+\end{lemma}
+
+\begin{proof}
+If $e$ is an edge of $G$, not a loop, we can then break the proper colorings of $G'_e$ into two classes:
+\begin{itemize}
+    \item Those in which the endpoints of $e$ have different colors. Such case is the proper colorings of $G$, with the chromatic polynomial given as $\chi_G(k)$.
+    \item Those in which the endpoints of $e$ have the same colors. Such case is the proper coloring of $G''_e$, with the chromatic polynomial given as $\chi_{G''_e}(k)$.
+\end{itemize}
+
+\quad So it follows that:
+\[
+    \chi_{G'_e} (k) = \chi_{G} (k) + \chi_{G''_e}(k) \\
+\]
+
+\quad which is equivalent to:
+\[
+    \chi_G (k) = \chi_{G'_e} (k) - \chi_{G''_e}(k) \\
+\]
+\end{proof}
+
+\begin{lemma}
+For a tree $T$ on $n$ vertices, its chromatic polynomial is given by:
+\[
+\chi_T(k) = k(k-1)^{n-1} \\
+\]
+\label{lem2}
+\end{lemma}
+
+\begin{proof}
+We shall proceed the proof by induction on the number of vertices:
+\begin{enumerate}
+    \item \textbf{Base case:} When $n=1$, we see that there are $k$ kinds of different colorings, which aligns with our original statement.
+    \item \textbf{Inductive case:} We give our inductive hypothesis as follows: Suppose that when $n=p \geq 1$, we have that $\chi_T(k;p) = k(k-1)^{p-1}$, we want to see that when $n=p+1$, we have $\chi_T(k;p+1) = k(k-1)^{p}$.
+
+    \quad So when $n=p+1$, the tree $T_{p+1} = (V_{p+1}, E_{p+1})$ now have its number of vertices as $p+1$. We choose certain vertex $a\in V_{p+1}$ and delete it from the tree, such that after the deletion, the graph is still a tree. In particular we see that before the deletion, $T_{p+1}$ attains $p+1$ vertices and $p$ edges, and after the deletion, since it is still a tree, it attains $p$ vertices and $p-1$ edges, it means that the deletion only delete a vertex that only connect to one vertex of $T_p$. By \textbf{Inductive Hypothesis}, we see that the chromatic polynomial of $T_p$ is given as $\chi_T(k;p) = k(k-1)^{p-1}$. For vertex $a$, if we insert it back into $T_p$ it only need to have different color with the vertex it connect to, in particular it has $k-1$ number of choices on coloring. So we see that:
+    \[
+        \chi_{T}(k;p+1) = (k-1)\chi_T(k;p) = (k-1) k(k-1)^{p-1} = k(k-1)^p \\
+    \]
+
+    \quad So we see the inductive case also holds.
+\end{enumerate}
+
+\quad By above reasoning, we successfully proof the lemma.
+\end{proof}
+
+We now \textbf{claim} that:
+\begin{equation}
+    \chi_{C_n}(k) = (-1)^n(k-1) + (k-1)^n, \text{ } \forall n\geq 3\\
+    \label{eq1}
+\end{equation}
+and
+\begin{equation}
+    \chi_{W_n}(k) = (-1)^n (k^2 - 2k) + k(k-2)^n, \text{ } \forall n \geq 4\\
+    \label{eq2}
+\end{equation}
+
+And we shall proceed our proof:
+\begin{proof}
+We first proof \textbf{Equation} \ref{eq1}. By \textbf{Lemma} \ref{lem1}, we see that:
+\[
+    \chi_{C_n} (k) = \chi_{C_n'e} (k) - \chi_{C_n''e}(k) \\
+\]
+
+\quad where we see that for the case of $C_n$, we have:
+\[
+\begin{aligned}
+    C_n'e &= T_n \\
+    C_n''e &= C_{n-1} \\
+\end{aligned}
+\]
+
+\quad Then we see that:
+\[
+\begin{aligned}
+    \chi_{C_n} (k) &= \chi_{C_n'e} (k) - \chi_{C_n''e}(k) \\    
+    \iff \chi_{C_n} (k) & = \chi_{T_n} (k) - \chi_{C_{n-1}}(k) \\
+\end{aligned}
+\]
+
+\quad By \textbf{Lemma} \ref{lem2}, we have that:
+\[
+\chi_T(k) = k(k-1)^{n-1} \\
+\]
+
+\quad So we see in fact we have:
+\[
+\begin{aligned}
+    \chi_{C_n} (k) & = k(k-1)^{n-1} - \chi_{C_{n-1}}(k) \\
+\iff k(k-1)^{n-1} &= \chi_{C_n} (k) + \chi_{C_{n-1}}(k)
+\end{aligned}
+\]
+
+\quad And it is easy to see that when $n=3$, we have a triangle, and to properly color it with $k$ colors, the chromatic polynomial will be $k(k-1)(k-2)$. In particular, we have:
+\[
+\chi_{C_3}(k) = k(k-1)(k-2) \\
+\]
+
+\quad So by:
+
+\begin{equation}
+    \label{eq3}
+    \chi_{C_n} (k) + \chi_{C_{n-1}}(k) = k(k-1)^{n-1} \\
+\end{equation}
+
+\quad We can then deduce that:
+\[
+\begin{aligned}
+    \chi_{C_n}(k) &= - \chi_{C_{n-1}}(k) + k(k-1)^{n-1} \\
+    \chi_{C_{n-1}}(k) &= - \chi_{C_{n-2}}(k) + k(k-1)^{n-2} \\
+    \chi_{C_{n-2}}(k) &= - \chi_{C_{n-3}}(k) + k(k=1)^{n-3} \\
+    & \vdots \\
+    \chi_{C_4} &= - \chi_{C_3}(k) + k(k-1)^3 \\
+\end{aligned}
+\]
+
+\quad And hence sum up all of the above by coefficient to delete intermediate terms, we can deduce that:
+\begin{equation}
+\begin{aligned}
+    \implies \chi_{C_n}(k) &= k(k-1)^{n-1}-k(k-1)^{n-2} + k(k-1)^{n-3} - k(k-1)^{n-4} + \cdots +\\
+    & (-1)^{n-4}k(k-1)^3 + (-1)^{n-5} k(k-1)(k-2)\\
+    &= (-1)\sum_{i=3}^{n-1}k(k-1)^i(-1)^{i-n} + (-1)^{n+1}k(k-1)(k-2)\\
+    &= (-1)^{n+1}[\sum_{i=3}^{n-1}k(k-1)^i(-1)^i+k(k-1)(k-2)] \\
+    &= (-1)^{n+1}k[\sum_{i=3}^{n-1}(1-k)^{i} + (k-1)(k-2)] \\
+\end{aligned}
+\label{eq4}
+\end{equation}
+
+\quad We then denote that:
+\[
+A = \sum_{i=3}^{n-1}(1-k)^i \\
+\]
+
+\quad Then we can deduce that:
+\[
+\begin{aligned}
+    A = (1-k)^3 &+ (1-k)^4 + \cdots + (1-k)^{n-1} \\
+\implies    (1-k)A &= (1-k)^4 + \cdots + (1-k)^{n-1} + (1-k)^{n} \\
+\implies -kA & = (1-k)^n - (1-k)^3 \\
+\implies A &= \frac{(1-k)^3 - (1-k)^n}{k} \\
+\end{aligned}
+\]
+
+\quad We then plug $A$ back to the \textbf{Equation} \ref{eq4}, and deduce that:
+\[
+\begin{aligned}
+    \chi_{C_n}(k) &= (-1)^{n+1}[-(1-k)^n+(1-k)^3 + k(k-1)(k-2)] \\
+    &= (-1)^{n+1}[k(k-1)(k-2) - (k-1)(k-1)^2 - (1-k)^n] \\
+    &= (-1)^{n+1}[(k-1)(k^2-2k-(k^2-2k+1)) - (1-k)^n] \\
+    &= (-1)^{n+1}[1-k-(1-k)^{n}] \\
+    &= (-1)^n(k-1) + (k-1)^n \\
+\end{aligned}
+\]
+
+\quad And thus we see that:
+\[
+\chi_{C_n}(k) = (-1)^n(k-1) + (k-1)^n, \text{ } \forall n \geq 3\\
+\]
+
+\quad So we successfully proof \textbf{Equation} \ref{eq1}!
+
+\quad Now considering $\chi_{W_n}(k)$, and we have following \textbf{key observations}:
+\begin{itemize}
+    \item $W_n$ actually consists of $n+1$ vertices, which attains $C_n$ as its subgraph.
+    \item The proper coloring of $W_n$ can be proceed by the following procedure:
+        \begin{enumerate}
+            \item First use a random color from the $k$-color set to color the center of the wheel. Namely first color the vertex that connects to all the rest of the vertices.
+            \item then the rest of the vertices form a wheel, and they can be given a proper coloring by $k-1$ different colors.
+        \end{enumerate}
+\end{itemize}
+
+\quad Thus \textbf{by the key observation}, we can deduce that:
+\[
+\begin{aligned}
+\chi_{W_n}(k) &= k\chi_{C_n}(k-1) \\
+\implies \chi_{W_n}(k) &= k((-1)^n (k-2) + (k-2)^n) \\
+&= (-1)^n(k^2-2k) + k(k-2)^n \\
+\end{aligned}
+\]
+
+\quad And thus we see that:
+\[
+    \chi_{W_n}(k) = (-1)^n (k^2 - 2k) + k(k-2)^n, \text{ } \forall n \geq 4\\
+\]
+
+\quad So we successfully proof \textbf{Equation} \ref{eq2}!
+\end{proof}
+\end{solution}
+\end{questions}

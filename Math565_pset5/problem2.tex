@@ -1,0 +1,81 @@
+\begin{questions}
+    \begin{problem}
+        Let $L$ be a geometric lattice, and $x \le y$ be two elements. Show that the interval
+            \[ [x, y] := \{z \in L \mid x \le z \le y\} \]
+        is again a geometric lattice.
+        \label{pb_1}
+    \end{problem}
+    \begin{solution}
+        We first state the proof for the following lemma:
+        \begin{lemma}
+            \label{lem_2}
+            Given a geometric lattice $L$, the property of semimodularity and no infinite chain implies that $\forall \; x, y \in L$, if $x \wedge y \lessdot x \implies y \lessdot x \vee y$.
+        \end{lemma}
+
+        \textbf{Proof of the Lemma}
+        \begin{proof}
+            Given arbitrary $x,y \in L$, see that $x\wedge y \leq y$, then consider:
+            \begin{itemize}
+                \item if $x\wedge y = y$. It follows that $y \leq x$, $x \wedge y \lessdot x \implies y \lessdot x \implies y \lessdot x \vee y$.
+    
+                \item if $x \wedge y < y$. Since $L$ contains no infinite chain, we can then construct a maximal chain from $x\wedge y$ to $y$, denoted as:
+                \[
+                x\wedge y = d_0 \lessdot \cdots \lessdot d_k = y
+                \]
+
+                and we want to see that $y \lessdot x \vee y$, i.e. $d_k \lessdot x \vee d_k$. We shall proceed the proof by induction on $i < k$ on such maximal chain to get stronger result that $d_i \lessdot x \vee d_i, \; \forall \; i\in \{1,\ldots, k\}$.
+                \begin{itemize}
+                    \item \textbf{Base case}: When $k=0$, see that $d_0 \lessdot x \vee d_0$ is actually $x\wedge y \lessdot x \vee (x\wedge y) \iff x \wedge y \lessdot x$, which is exactly our assumption, so the base case holds.
+                    \item \textbf{Inductive case}: Suppose that $d_i \lessdot x \vee d_i$, we want to see that $d_{i+1} \lessdot x \vee d_{i+1}$. See that since $d_{i} \lessdot d_{i+1}$ and $d_{i} \lessdot x \vee d_i \implies d_{i+1} \lessdot (x\vee d_i)\vee d_{i+1} \iff d_{i+1} \lessdot x\vee (d_i\vee d_{i+1})$. But since $d_{i}\lessdot d_{i+1} \implies (d_i \vee d_{i+1}) = d_{i+1}$. Then $d_{i+1} \lessdot x \vee d_{i+1}$. So the inductive case also follows.
+                \end{itemize}
+            \end{itemize}
+
+            So see that $d_k \lessdot x \vee d_k \iff y \lessdot x \vee y$.
+        \end{proof}
+
+        \textbf{Proof of the Original Statement}
+        \begin{proof}
+            To see that $[x,y]$ is a geometric lattice, we need to verify that its join, meets exists for every elements, there is no infinite chain, and it is atomic and semimodular.
+            \begin{itemize}
+                \item \textbf{Joins, meets exist}: $\forall \; a,b \in [x,y]$, we see that $x \leq a \leq y$, $x \leq b \leq y$.
+                \[
+                \begin{aligned}
+                    x \leq a, x \leq b &\implies x \leq a \wedge b\\
+                    a \leq y, a\wedge b \leq a \leq y & \implies a \wedge b \leq y \\
+                    \implies a\wedge b &\in [x,y]
+                \end{aligned}
+                \]
+
+                thus $a\wedge b$ exists in $[x,y]$.
+                \[
+                \begin{aligned}
+                    a \leq y, b \leq y &\implies a \vee b \leq y \\
+                    x\leq a \implies x \leq a \leq a\vee b &\implies x \leq a \vee b \\
+                    \implies a \vee b & \in [x,y]
+                \end{aligned}
+                \]
+
+                thus $a\vee b$ exists in $[x,y]$.
+                \item \textbf{Without infinite chain}: Since $[x,y] \subseteq L$, $L$ has no infinite chain $\implies$ $[x,y]$ has no infinite chain, such statement is trivial to see by contraposition.
+                \item \textbf{Semimodularity}: Since we've already seen that $a\vee b$ exists for all $a, b \in [x,y]$, semimodularity of $[x,y]$ is directly inherit from the semimodularity of $L$.
+                \item \textbf{Atomic}: Without losing generality, denote the set of atoms of $L$ as $\{l_1, \ldots, l_n\}$. We claim that $\{x\vee l_i \; | \; x \vee l_i \neq x, \; i \in \{1,\ldots, n\}\} =: A'$, is a subset of the atom set of $[x,y]$. i.e. $\forall a \in A'$, $a$ is an atom of $[x,y]$. First note that $\forall z \in [x,y], \; x \leq z$, which means that $x$ will be the minimum of $[x,y]$. It is sufficient to show that $\forall a\in A', \; x \lessdot a$. First note that $x\vee l_i \neq x \implies l_i \not \leq x$. For those $l_i$ such that $l_i \not \leq x$, consider $l_i \wedge x$. Since $l_i \wedge x \leq l_i$, $l_i\wedge x \leq x$, but $l_i \not \leq x$. So $l_i \wedge x\neq l_i$. But since $l_i$ is the atom, then $\mathbf{\hat 0} \lessdot l_i$ be the only element in the lattice that less than $l_i \implies l_i \wedge x = \mathbf{\hat 0} \lessdot l_i$. Since we already verified that the semimodularity of $[x,y]$ holds, then by \textbf{Lemma} \ref{lem_2}, see that $x \lessdot x\vee l_i$, in particular $x\vee l_i$ covers $x$, so $A'$ is a subset of the atom set of $[x,y]$. But then $\forall \; l \in [x,y]$, since $l_i$ is the atoms of $L$, then:
+                \[
+                \begin{aligned}
+                    l &= \bigvee_{i\in I} l_i \\
+                    \iff l\vee x &= \bigvee_{i \in I} l_i \vee x \\
+                    \iff l\vee x &= \bigvee_{i\in I}(l_i \vee x) \\
+                \end{aligned}
+                \]
+
+                and $l \vee x = l$ by the fact that $x \leq l$. So:
+                \[
+                    l = \bigvee_{i \in I} (l_i \vee x)
+                \]
+
+                so every element in $[x,y]$ can be expressed as the joins of a subset of the atom set of $[x,y]$, which means that $[x,y]$ is indeed atomic.
+            \end{itemize}
+
+            Thus we see $[x,y]$ is a gemoetric lattice.
+        \end{proof}
+    \end{solution}
+\end{questions}

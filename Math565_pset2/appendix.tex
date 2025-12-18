@@ -1,0 +1,104 @@
+\begin{subsection}{Source Code}
+
+Python source code that simulates the non-existence of blue $K_4$ and red $K_4$ in \textbf{Problem 1}.
+
+\begin{minted}[breaklines, linenos]{python}
+import matplotlib.pyplot as plt
+import numpy as np
+import itertools
+
+n = 17
+
+def get_edge_color(v1, v2):
+    # Calculate the direct difference between the two points
+    diff = abs(v1 - v2)
+    # On a circular structure, the shortest distance is the minimum of diff and n-diff
+    min_diff = min(diff, n - diff)
+
+    if min_diff in {1, 2, 4, 8}:
+        return 'red'
+    else:
+        return 'blue'
+    
+    # If the difference is not in these sets, there is no edge
+    return None
+
+angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
+x_coords = np.cos(angles)
+y_coords = np.sin(angles)
+
+plt.figure(figsize=(12, 12))
+ax = plt.gca()
+ax.set_aspect('equal', adjustable='box')
+plt.axis('off')
+
+
+# Iterate through all pairs of vertices (i, j) with i < j to avoid duplicate drawing
+for i in range(n):
+    for j in range(i + 1, n):
+        # Get the color of the edge
+        color = get_edge_color(i, j)
+        # If a color is defined, draw a line segment connecting the two vertices
+        if color:
+            plt.plot([x_coords[i], x_coords[j]], [y_coords[i], y_coords[j]], color=color, alpha=0.7, linewidth=1.2)
+
+# Draw black circles at the calculated coordinates to represent the vertices
+plt.plot(x_coords, y_coords, 'o', color='black', markersize=12)
+# Add a numerical label to each vertex, slightly offset for better visibility
+for i in range(n):
+    plt.text(x_coords[i] * 1.1, y_coords[i] * 1.1, str(i), fontsize=12, ha='center', va='center')
+
+plt.title('K_17 Graph Coloring', fontsize=16)
+# Save the generated plot to a file
+plt.savefig("k17_graph.png")
+print("Graph has been generated and saved as k17_graph_en.png")
+
+
+# Check for the existence of a monochromatic K_4 subgraph
+print("\nChecking for monochromatic K_4 subgraphs...")
+
+found_monochromatic_k4 = False
+monochromatic_subsets_found = []
+
+# itertools.combinations(range(n), 4) generates all possible 4-vertex subsets
+all_4_vertex_subsets = itertools.combinations(range(n), 4)
+
+# iterations
+for subset in all_4_vertex_subsets:
+    # Get all 6 edges within this 4-vertex subgraph
+    edges = list(itertools.combinations(subset, 2))
+    
+    # Get the color of the first edge to use as a reference
+    first_edge_color = get_edge_color(edges[0][0], edges[0][1])
+    
+    is_monochromatic = True
+    # Check if the remaining 5 edges have the same color as the reference
+    for i in range(1, len(edges)):
+        edge = edges[i]
+        if get_edge_color(edge[0], edge[1]) != first_edge_color:
+            # If an edge with a different color is found, the subgraph is not monochromatic
+            is_monochromatic = False
+            break
+    
+    # If the loop completes and is_monochromatic is still True, we found one
+    if is_monochromatic:
+        found_monochromatic_k4 = True
+        monochromatic_subsets_found.append(subset)
+
+print("-" * 30)
+if found_monochromatic_k4:
+    print("Verification Result: Monochromatic K_4 subgraphs were found.")
+    print(f"A total of {len(monochromatic_subsets_found)} monochromatic K_4 subgraphs were found.")
+    print("Here are some examples:")
+    # Print only the first 10 found combinations as examples
+    for s in monochromatic_subsets_found[:10]:
+        color_name = get_edge_color(s[0], s[1])
+        print(f"  - Combination: {s}, Color: {color_name}")
+else:
+    print("Verification Result: No monochromatic K_4 subgraphs were found among all 4-vertex subsets.")
+print("-" * 30)
+
+plt.show()
+
+\end{minted}    
+\end{subsection}

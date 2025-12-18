@@ -1,0 +1,111 @@
+\begin{questions}
+    \begin{problem}
+    \label{pb_3}
+    Let $\mathcal{A}$ be the hyperplane arrangement consisting of the $n$ hyperplanes $x_i = 0$ in $\mathbb{R}^n$, for $i = 1, 2, \ldots, n$.
+
+    \begin{enumerate}
+        \item[(a)] Show that the intersection poset $L(\mathcal{A})$ is isomorphic to the Boolean algebra.
+    \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+        First denote that:
+        \[
+        H_i := \{(x_1,\ldots, x_n) \; | \; x_i = 0, \; i \in [n]\}
+        \]
+
+        to be the $n$ hyperplane in $\mathcal A$. We then define a function as follow, and we intend to see it is an isomorphism:
+        \[
+        \begin{aligned}
+            \varphi: L(\mathcal A) &\longrightarrow 2^{[n]} \\
+            H_I:=\bigcap_{i \in I, I\subseteq [n]} H_i &\longmapsto I \subseteq [n] 
+        \end{aligned}
+        \]
+        \begin{itemize}
+            \item $\boldsymbol{\varphi}$ \textbf{is well-defined:} it is clear that $\varphi$ is well-defined, since if $I\neq J$, then $H_I \neq H_J$ by our definition.
+            \item $\boldsymbol{\varphi}$ \textbf{is injective:} given that:
+            \[
+            \begin{aligned}
+                \varphi(H_I) &= \varphi(H_J) \\
+                \iff I &= J \\
+                \implies H_I &= H_J \\
+            \end{aligned}
+            \]
+
+            so $\varphi$ is injective.
+            \item $\boldsymbol{\varphi}$ \textbf{is surjective:} by definition, it is clear that given $I\subseteq [n]$, there exists $H_I$, with $\varphi(H_I) = I$.
+            \item $\boldsymbol{\varphi}$ \textbf{is homomorphism w.r.t. the poset:} we want to see that for $A,B \in L(\mathcal A)$:
+            \[
+            A \leq B \iff \varphi(A) \leq \varphi(B)
+            \]
+
+            we write:
+            \[
+            \begin{aligned}
+                A &:= \bigcap_{i\in I, I \subseteq [n]} H_i = H_I \\
+                B &:= \bigcap_{i\in J, J \subseteq [n]} H_i = H_J \\
+            \end{aligned}
+            \]
+
+            then:
+            \[
+            \begin{aligned}
+                A & \leq B \\
+                \iff B &\subseteq A \\
+                \iff \bigcap_{i\in J, J \subseteq [n]} H_i &\subseteq \bigcap_{i\in I, I \subseteq [n]} H_i \\
+                \iff I &\subseteq J \\
+                \iff \varphi(A) &\subseteq \varphi(B) \\
+                \iff \varphi(A) &\leq \varphi(B) \\
+            \end{aligned}
+            \]
+
+            So we see $\varphi$ preserve the poset structure between $L(\mathcal A)$ and $2^{[n]}$.
+        \end{itemize}
+
+        So we see there exists an isomorphism $\varphi$ between $L(\mathcal A)$ and the Boolean algebra $B_n$.
+        \end{proof}
+    \end{solution}
+
+    \begin{problem}
+        Same setting as \textbf{Problem} \ref{pb_3}:
+        \begin{enumerate}
+            \item[(b)] Compute the Mobius function of $L(\mathcal{A})$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        We've proven in \textbf{Problem} \ref{pb_3} that $L(\mathcal A)$ is isomorphic with Boolean algebra $B_n$, so they will share the same Mobius function. We proven in \textbf{Problem} \ref{bool_euler} that Boolean algebra $B_n$ is actually an Eulerian poset, then so is $L(\mathcal A)$. And we've proven in \textbf{Problem} \ref{bool_alg_mo}, that a poset is Eulerian if and only if its Mobius function is given by $\mu(s,t) = (-1)^{\rho(t) - \rho(s)}$. So we see the Mobius function of $L(\mathcal A)$ is also given by $\mu(s,t) = (-1)^{\rho(t) - \rho(s)}$.
+    \end{solution}
+
+    \begin{problem}
+        \label{chi_a}
+        Same setting as \textbf{Problem} \ref{pb_3}:
+        \begin{enumerate}
+            \item[(c)] Compute the characteristic polynomial of $\mathcal{A}$.
+        \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        By definition, we see:
+        \[
+        \chi_{\mathcal A} (t) = \sum_{X \in L(\mathcal A)} \mu(X) \cdot t^{\dim X}
+        \]
+
+        Since $L(\mathcal A)$ is Eulerian poset, the Mobius function of an element $X$ of $L(\mathcal A)$ is given by:
+        \[
+        \mu(X) = (-1)^{\rho(X) - \rho(\hat{0})} = (-1)^{\rho(X)}
+        \]
+
+        Since we see in Boolean algebra is isomorphic to $L(\mathcal A)$, see that $\rho(X) = |\varphi(X)|$ and $\dim X = n - |\varphi(X)|$, so:
+        \[
+        \begin{aligned}
+            \chi_{\mathcal A} (t) &= \sum_{X\in L(\mathcal A)} (-1)^{|\varphi(X)|} \cdot t^{n - |\varphi(X)|} \\
+            &= \sum_{\varphi(X) \in P(B_n)} (-1)^{|\varphi(X)|} \cdot t^{n - |\varphi(X)|} \\
+            &= \sum_{k \in P(B_n)} (-1)^{|k|} \cdot t^{n-|k|} \\
+            &= \sum_{i=0}^{n} \binom{n}{i} (-1)^i \cdot t^{n-i} \\
+            &= (t-1)^n \\
+        \end{aligned}
+        \]
+    \end{solution}
+\end{questions}

@@ -1,0 +1,61 @@
+\begin{questions}
+    \begin{problem}
+        Prove Hall’s theorem from the maxflow-mincut theorem.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Given a bipartite graph $G = X\sqcup Y$, it is obvious to see that if there is a complete matching from $X$ to $Y$ in $G$, we have $|\Gamma(A)| \geq |A|$ for every $A\subset X$.
+
+            \quad So we intend to see when $|\Gamma(A)| \geq |A|$ for every $A\subset X$, we will have a complete matching from $X$ to $Y$. We now build a transportation network by following rules:
+            \begin{itemize}
+                \item Adding a vertex $s$ as the source vertex, and connect the direct edges by $(s,x), \forall x \in X$, we give the capacity of such edges to be $1$.
+                \item Adding a vertex $t$ as the sink vertex, and connect the direct edges by $(y,t), \forall y \in Y$, we give the capacity of such edges to be $1$.
+                \item For edges between the two component $X$ and $Y$ of the original bipartite graph $G$, we directed the directions of the edges by $(x,y)$ where $x\in X, y\in Y$, we assign the capacity of such edges to be $|X| + 1$.
+            \end{itemize}
+
+            \quad Hence we successfully build up a transportation network, denoted as $(D, s, t)$.
+            \quad We now want to see that having a matching from $X$ to $Y$ with size $k$ in $G$ if and only if there exists a flow with $|f| = k$ in transportation network $(D, s, t)$.
+
+            \quad Suppose we have a matching from $X$ to $Y$ with size $k$ in $G$, we can directly set the corresponding edges of the matching in $(D,s,t)$ with their flows to be $1$. Given $(x,y)$ in the $k$-matching, we set the flow of the $(s,x)$ and $(y,t)$ to be $1$. All the rest of the edges' flows will be set to $0$. Such construction satisfy the conservation of flows, and thus is a valid flow. One can easily check that such flow's strength is $k$.
+
+            \quad Suppose there exists a flow with $|f| = k$ in transportation network $(D,s,t)$. Observe that $D = \{s\} \sqcup \{t\} \sqcup X \sqcup Y$, by conservation of flow we see that:
+            \[
+            |f| = k = f(\{s\}, \{t\}\cup X\cup Y) = f(\{s\} \cup X, Y \cup \{t\}) = f(\{s\} \cup X \cup Y, \{t\})
+            \]
+
+            Since the capacity of edges between $\{s\}$ and $X$ are all set to $1$, it follows that there are in total $k$ edges with flow between such two sets. And thus by conservation of flow, there are also $k$ edges between $X$ and $Y$, no two touches same vertices followed by the fact that there are still $k$ edges with flow between $Y$ and $\{t\}$. So we see such $k$ edges with flow equal to $1$ between $X$ and $Y$ are the intended $k$-matching.
+
+            \quad We then want to proof that when $|\Gamma(A)| \geq |A|$, for every $A \subset X$, there exists a maximum flow $|f| = |X|$, which is, by maxflow-mincut theorem, exists a mincut $C(S,T) = |X|$ in the transportation network $(D,s,t)$. We shall proceed the proof by contraposition, suppose that there exists a mincut $(S,T)$, such that $C(S,T) < |X|$, we want to see that there exists $A \subset X$, such that $|\Gamma(A)| < |A|$. We define a set as follow:
+            \[
+            P = (X\cap T) \sqcup (Y\cap S) \\
+            \]
+
+            Since all the edges between $X$ and $Y$ attains capacity to be $|X| + 1$, and $C(S,T) = |X| < |X| + 1$, so for a mincut to hold, there exists no edges $e = (x,y)$, where $x \in X\cap S$ and $y\in Y\cap T$. So for all the edges $e=(x,y)$, if $x\in X\cap S$, then $y\in Y\cap S$. So it follows that:
+            \begin{equation}
+            |\Gamma(X\cap S)| \leq |Y\cap S| \\
+            \label{eq1}
+            \end{equation}
+
+            and we see all the edges $e=(x,y)$ from $S$ to $T$ will be either $x = s, y\in X\cap T$ or $x \in Y\cap S, y = t$. By our construction of the transportation network, we see:
+            \begin{equation}
+            C(S,T) = |P| = |X\cap T| + |Y\cap S| < |X|
+            \label{eq2}
+            \end{equation}
+
+            And with the fact that:
+            \begin{equation}
+                |X\cap S| + |X\cap T| = |X|
+                \label{eq3}
+            \end{equation}
+            
+            Combining \textbf{Equation} \ref{eq1}, \textbf{Equation} \ref{eq2} and \textbf{Equation} \ref{eq3}, it follows that:
+            \[
+            |\Gamma(X\cap S)| < |X\cap S|
+            \]
+
+            so we find the intended subset of $X$ by $A = X\cap S$. So by contraposition the original statement holds.
+            
+         \end{proof}
+    \end{solution}
+\end{questions}

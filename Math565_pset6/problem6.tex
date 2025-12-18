@@ -1,0 +1,97 @@
+\begin{questions}
+    \begin{problem}
+        Let $G$ be a simple graph on $[n]$ and let $\mathcal{A}_G$ denote the corresponding graphical arrangement in $\mathbb{R}^n$. Prove that when $G$ has no cycles, the poset $L(\mathcal{A}_G)$ is isomorphic to a Boolean algebra. Deduce a formula for the number of regions and bounded regions in $\mathcal{A}_G$ in this case.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            We denote the hyperplanes in the graphical arrangment in $\mathbb R^n$ as follow:
+            \[
+            H_{(i,j)} := \{(x_1,\ldots, x_n) \in \mathbb R^n \; | \; x_i = x_j, \; (i,j) \in E(G)\}
+            \]
+            
+            We denote $|E(G)| = m$. We then define a function as follow, and we intend to see it is an isomorphism:
+            \[
+            \begin{aligned}
+                \varphi: B_m &\longrightarrow L(\mathcal A_G) \\
+                I \subseteq E(G) & \longmapsto \bigcap_{e\in I} H_e=: H_{G_I} \\
+            \end{aligned}
+            \]
+
+            where $G_I$ is the subgraph of $G$ induced by edges in the edge set $I$, and the ground set of $B_m$ is $E(G)$, which is the edge set of the simple graph $G$.
+            \begin{itemize}
+                \item $\boldsymbol{\varphi}$ \textbf{is well-defined:} it is clear that $\varphi$ is well-defined since $\mathcal A_G$ is the graphical arrangement induced by the graph $G$.
+                \item $\boldsymbol{\varphi}$ \textbf{is injective:} since $G$ is simple and has no cycle, meaning that the graph is forest and thus independent, so different subspaces constructed by the intersection of different hyperplanes induced by different edge sets are different, thus for any $S_1, S_2 \in E(G)$:
+                \[
+                S_1 \neq S_2 \implies \bigcap_{e\in S_1} H_e \neq \bigcap_{e\in S_2} H_e 
+                \]
+
+                which yields the injectivity of $\varphi$ by contraposition.
+                \item $\boldsymbol{\varphi}$ \textbf {is surjective:} given $H \in \mathcal A_G$, it can be written as $\bigcap_{e\in K} H_e$ for some $K \subseteq E(G)$ since it is a graphical arrangement. Then we see $H = \varphi(K)$, which yields the surjectivity of $\varphi$.
+                \item $\boldsymbol{\varphi}$ \textbf{is homomorphism w.r.t. to poset:} we want to see that for $I, J \subseteq E$:
+                \[
+                I\leq J \iff \varphi(J) \geq \varphi(I)
+                \]
+
+                see that:
+                \[
+                \begin{aligned}
+                    I &\leq J \\
+                    \iff I &\subseteq J \\
+                    \implies \bigcap_{e\in J} H_e &\subseteq \bigcap_{e\in I} H_e \\
+                \end{aligned}
+                \]
+
+                But since $G$ is a simple graph with no cycle:
+                \[
+                \bigcap_{e\in J} H_e \subseteq \bigcap_{e\in I} H_e \implies I \subseteq J \\
+                \]
+
+                then:
+                \[
+                \begin{aligned}
+                \bigcap_{e\in J} H_e \subseteq \bigcap_{e\in I} H_e &\iff I \subseteq J \\
+                \implies \varphi(J) \subseteq \varphi(I) &\iff I\subseteq J \\
+                \implies \varphi(J) \geq \varphi(I) &\iff I \leq J\\ 
+                \end{aligned}
+                \]
+
+                So we see $\varphi$ preserve the poset structure between $L(\mathcal A_G)$ and $B_m$.
+            \end{itemize}
+
+            So we see that when $G$ be simple graph that has no cycles, the poset $L(\mathcal A_G)$ is isomorphic to a Boolean algebra, in this case is $B_m$ where $m$ is the size of the edge set of $G$.
+        \end{proof}
+
+        \textbf{Deduction of $\mathbf{r(\mathcal A_G)}$ and $\mathbf{b(\mathcal A_G)}$:}
+
+        Since $L(\mathcal A_G)$ is isomorphic to $B_m$ which is a Boolean algebra, by \textbf{Problem} \ref{chi_a}, we've seen that hyperplane arrangement which are isomorphic to $B_n$ has the characteristic polynomial to be:
+        \[
+        \chi_{\mathcal A} (t) = (t-1)^n \\
+        \]
+
+        For $I\subseteq E$, the corresponding subspace attains dimension to be $n-|I|$. So we see for graphical arrangment $\mathcal A_G$, the characteristic polynomial is given by:
+        \[
+        \begin{aligned}
+        \chi_{\mathcal A_G} &= \sum_{k=0}^{m} \binom{m}{k}(-1)^k t^{n-k} \\
+        &= t^{n-m} \sum_{k=0}^{m} (-1)^k t^{m-k} \\
+        &= t^{n-m} (t-1)^m \\
+        \end{aligned}
+        \]
+
+        And we see for any hyperplane arrangement $\mathcal A$:
+        \[
+        \begin{aligned}
+            r(\mathcal A) &= (-1)^n\chi_{\mathcal A} (-1) \\
+            b(\mathcal A) &= (-1)^{rank(\mathcal A)} \chi_{\mathcal A}(1) \\
+        \end{aligned}
+        \]
+
+        So for $\mathcal A_G$, we have:
+        \[
+        \begin{aligned}
+            r(\mathcal A_G) &= (-1)^n\chi_{\mathcal A_G}(-1) = (-1)^n \cdot (-1)^{n-m} \cdot(1-(-1))^m=  2^m \\
+            b(\mathcal A_G) &= (-1)^{rank(\mathcal A_G)} \chi_{\mathcal A_G} (1)= (1-1)^m = 0 \\
+        \end{aligned}
+        \]
+    \end{solution}
+\end{questions}

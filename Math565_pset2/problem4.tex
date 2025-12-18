@@ -1,0 +1,34 @@
+\begin{questions}
+    \begin{problem}
+Let $XYZ$ be an equilateral triangle, and let $S$ be the set of all points on the three segments $XY$, $YZ$, $XZ$. Prove that in any two-coloring of $S$, we can find a right-angled triangle all of whose vertices have the same color.
+    \end{problem}
+
+\begin{solution}
+    \begin{proof}
+        We first extract out the inscribed equilateral triangle of the equilateral triangle $XYZ$, and then label the vertices of such triangle as $ABC$, as shown in the picture below:
+        
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/equi_triangle.png}
+        \end{center}
+        
+        \quad Suppose that the points of the equilateral triangle is colored in red and blue. We shall analyze the case of the coloring of $ABC$:
+        \begin{itemize}
+            \item $\mathbf{ABC}$ \textbf{are colored in same color:} We see that a valuable property induced by the inscribed equilateral triangle $ABC$ is that:
+
+            \[
+            \begin{aligned}
+                AB & \perp XZ \\
+                AC & \perp XY \\
+                BC & \perp YZ \\
+            \end{aligned}
+            \]
+
+            Without losing generality, we suppose that point $ABC$ are all colored in red. Then if any point on the line segment of the outer equilateral triangle other than $ABC$ are colored in red, we can always find a right-angled red triangle. But if all of the point on the line segment of the outer equilateral triangle other than $ABC$ are in blue, we can easily find other right-angled triangle blue triangle. $\mathbf{\longrightarrow}$ \textbf{DONE!}
+
+            \item $\mathbf{ABC}$ \textbf{are not all colored in the same color:} By \textbf{Pigeonhole Principle}, we see that two of the three points will be colored in the same color. Without losing generality, we suppose that $AB$ will be colored in red, and $C$ will be colored in blue. Then any point on the line segment $XZ$ other than $B$ is in red will resulted in the intended right-angled red triangle. But if all of the points on the line segment $XZ$ other than B are colored in blue, then we can draw a perpendicular line from $C$ to $XZ$, and mark the foot of the perpendicular as $E$, we see that both $C$ and $E$ are colored in blue in this situation. And with all the point on line segment $XZ$ other than $B$ are colored in blue, then we see $\triangle CEX$ will be an intended right-angled blue triangle. $\mathbf{\longrightarrow}$ \textbf{DONE!}
+        \end{itemize}
+
+        \quad So we see in all cases, we are managed to find a right-angled triangle with all of whose vertices have the same color. So the proof is done.
+    \end{proof}
+\end{solution}
+\end{questions}

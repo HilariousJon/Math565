@@ -1,0 +1,31 @@
+\begin{questions}
+\begin{problem}
+    The \textit{degree} $\deg(v)$ of a vertex $v$ is the number of edges incident to $v$, with the convention that a loop at $v$ contributes two to the degree of $v$.
+    
+    \quad A graph $G$ is called $k$-regular if all its vertices have degree exactly equal to $k$. Determine all pairs $(k, n)$ such that there exists a $k$-regular simple graph on $n$ vertices.
+\end{problem}
+
+\begin{solution}
+        We consider the situation separately by divide situation and analysis on $n$. We first define the graph $G=(V, E)$.
+
+        \begin{itemize}
+            \item When $n \in \{2m+1 | m \in \mathbb N\}$, in particular $n$ is odd number. 
+            \begin{enumerate}
+                \item \textbf{$k$ is odd number}. We see that all the odd $k$ will not work, by that:
+        
+                    \[
+                    \sum_{x \in V} \deg(x) = 2|E|
+                    \]
+        
+                    while the \textit{LHS} equals to $n\cdot k$ which is odd number, \textit{RHS} is apparently even number. So such situation will not happen.
+                \item \textbf{$k$ is even number}. In particular, $k\in \{2m | m\in \mathbb N, 0 \leq m \leq \frac{n-1}{2}\}$. We consider label the $n$ vertices by $0, 1, 2, \cdots, n-1$, and place them uniformly in order onto a circle. We then connect arbitrary point with label $i$ by $i\pm 1, i\pm 2, \cdots, i \pm \frac{k}{2}$. Such strategy will result in a $k$-regular simple graph, which is intended.
+            \end{enumerate}
+            \item When $n \in \{2m | m \in \mathbb N\}$, in particular $n$ is even number.
+            \begin{enumerate}
+                \item \textbf{$k$ is even number}. In particular $k\in \{2m | m \in \mathbb N, 0 \leq m \leq \frac{n}{2} -1 \}$. Again we consider label the $n$ vertices by $0,1,2,\cdots, n- 1$ and proceed the same process as previous done to get a $k$-regular simple graph.
+                \item \textbf{$k$ is odd number}. In particular $k \in \{2m+1 | m \in \mathbb N, 0 \leq m \leq \frac{n}{2} - 1\}$. We consider first construct a $k-1$-regular subgraph by previous process, then for each of the point labeled with $i$, we can then connect the edge $(i, i+\frac{n}{2})$ to get the $k$-regular graph, in particular connect it with the corresponding diagonal vertex in the regular $n$-gon, which is intended.
+            \end{enumerate}
+        \end{itemize}
+        \quad To summarize, when $n$ is odd, $k$ can be taken as all even integers satisfying $0 \leq k \leq n$. when $n$ is even, $k$ can be taken as all integers satisfying $0\leq k \leq n-1$.
+\end{solution}
+\end{questions}

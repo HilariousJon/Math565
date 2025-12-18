@@ -1,0 +1,63 @@
+\begin{questions}
+
+\begin{problem}
+    The edges of $K_n$ are colored red and blue in such a way that a red edge is in at most one red triangle. Show that there is a subgraph $K_k$ with $k \geq \lfloor \sqrt{2n} \rfloor$ that contains no red triangle.
+\end{problem}
+
+\begin{solution}
+    \begin{proof}
+        We first extract out the $K_k$ from $K_n$, with $k$ be the largest integer, such that $K_k$ contains no red triangle.
+
+        \quad In particular, in this situation, adding any other vertex will generate a new red triangle in the graph.
+
+        \quad We now consider the number of the rest of the vertices. Note that adding any the rest of the vertex back will form a red triangle. Since a red edge is in at most one red triangle, then with different vertices not in $K_k$ added back in $K_k$ will form red triangle with different edges in $K_k$, as if not the case, the property will be violated.
+
+        \quad We see the number of the rest of the vertices $p$ then satisfy that:
+        
+        \[
+            \begin{aligned}
+                n & = k+p \\
+                p & \leq \#E(K_k) \\
+            \end{aligned}
+        \]
+        
+        \quad where $\# E(K_k)$ denote the number of edges in $K_k$. And since $K_k$ is complete, we see that:
+
+        \[
+            \# E(K_k) = \binom{k}{2} = \frac{k(k-1)}{2} \\
+        \]
+
+        \quad Then, we see:
+
+        \[
+        \begin{aligned}
+            n = k+p & \leq \binom{k}{2} + k = \frac{k(k+1)}{2} \\
+            \iff 2n & \leq k(k+1) < (k+1)^2 \\
+            \implies k & > \sqrt{2n} - 1 \\
+            \implies k & \geq \lfloor \sqrt{2n} \rfloor \\
+        \end{aligned}
+        \]
+
+        \quad which proof the theorem.
+    \end{proof}
+    
+    \textbf{Alternative Method:} 
+    
+    \quad Moreover, consider remove all the blue edges, and consider the remaining edges (the blue edges is essentially useless in the context).
+
+    \quad By \textbf{Thuran's theorem}, we see $\#E(K) \leq \frac{n^2}{4}$, then we consider the inequality as follows to solve, which gives a tighter bound:
+
+    \[
+        p = n - k \leq \frac{k^2}{4} \iff \frac{k^2}{4} + k \geq n \\
+    \]
+
+    \textbf{Alternative Heuristic:}
+    
+    \quad Consider the situation of piling up all the red triangles, and trim off one vertex in each triangle. We want to see that this way of trimming vertex removes the most number of vertices to eliminate the red triangle. And remain vertices number is $\frac{2}{3}n$. We see that for:
+
+    \[
+        \frac{2}{3} n \geq \lfloor \sqrt 2n \rfloor \iff 2n \geq 9
+    \]
+    so for $n=3, n=4$ we shall draw the example to prove, for larger one, this holds by our way of eliminate the vertices.
+\end{solution}
+\end{questions}

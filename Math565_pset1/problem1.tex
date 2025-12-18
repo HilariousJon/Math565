@@ -1,0 +1,55 @@
+\begin{questions}
+\begin{problem}
+Show that a connected graph on $n$ vertices is a tree if and only if it has $n-1$ edges.
+\end{problem}
+
+\begin{solution}
+    \begin{proof}
+    Let $G = (V, E)$ be a connected graph with $|V| = n$ and $|E| = m$. We aim to show that $G$ is a tree if and only if $m = n - 1$.
+
+    \vspace{1em}
+    \noindent \textbf{($\implies$): If $G$ is a tree, then $m = n - 1$.}
+    
+    We proceed by induction on the number of vertices $n$.
+    \begin{itemize}
+        \item \textbf{Base Case:} For $n=1$, the graph consists of a single isolated vertex. It has $0$ edges. Since $n-1 = 1-1 = 0$, the statement holds.
+        
+        \item \textbf{Inductive Hypothesis:} Assume that any tree with $k$ vertices has $k-1$ edges.
+        
+        \item \textbf{Inductive Step:} Let $G$ be a tree with $n = k+1$ vertices (where $k \ge 1$). 
+        Since $G$ is a tree with at least 2 vertices, it must contain at least one leaf node (a vertex $v$ with degree 1). Let $v$ be a leaf and let $e$ be the edge connecting $v$ to the rest of the graph.
+        
+        Consider the graph $G' = G - \{v\}$ obtained by removing vertex $v$ and the incident edge $e$.
+        \begin{enumerate}
+            \item Since $v$ was a leaf, removing it does not disconnect the rest of the graph. Thus, $G'$ is connected.
+            \item Since $G$ had no cycles, $G'$ (which is a subgraph of $G$) also has no cycles.
+        \end{enumerate}
+        Therefore, $G'$ is a tree with $k$ vertices. By the inductive hypothesis, $G'$ has $k-1$ edges.
+        The number of edges in the original graph $G$ is the number of edges in $G'$ plus the one edge $e$ we removed.
+        $$ |E(G)| = |E(G')| + 1 = (k-1) + 1 = k $$
+        Since $n = k+1$, we have $k = n-1$. Thus, $G$ has $n-1$ edges.
+    \end{itemize}
+
+    \vspace{1em}
+    \noindent \textbf{($\impliedby$): If $G$ is connected and has $n - 1$ edges, then $G$ is a tree.}
+    
+    We are given that $G$ is connected and $m = n-1$. To prove $G$ is a tree, we only need to show that $G$ contains no cycles (is acyclic).
+    
+    We use proof by contradiction. Assume that $G$ is connected, has $n-1$ edges, but contains a cycle.
+    \begin{enumerate}
+        \item Since $G$ contains a cycle, removing an edge from that cycle does not disconnect the graph.
+        \item We can repeatedly remove edges from cycles until no cycles remain. Let the resulting graph be $G'$.
+        \item Since we only removed edges that were part of cycles, $G'$ remains connected.
+        \item Since $G'$ has no cycles and is connected, $G'$ is a tree (specifically, a spanning tree of $G$).
+    \end{enumerate}
+    
+    The graph $G'$ still has $n$ vertices. By the result proved in Direction 1, a tree with $n$ vertices must have exactly $n-1$ edges.
+    However, to obtain $G'$, we removed at least one edge from the original graph $G$ (because we assumed $G$ had a cycle).
+    Therefore:
+    $$ |E(G)| > |E(G')| = n - 1 $$
+    This implies $|E(G)| > n-1$, which contradicts the given condition that $|E(G)| = n-1$.
+    
+    Thus, the assumption that $G$ contains a cycle must be false. $G$ is connected and acyclic, so $G$ is a tree.
+    \end{proof}
+\end{solution}
+\end{questions}

@@ -1,0 +1,68 @@
+\begin{questions}
+    \begin{problem}
+        Let $X$ be a set with $n^2 + n + 1$ elements, where $n \geq 2$. Let $\mathcal L$ a collection of $n^2 + n + 1$ subsets of $X$, such that each $L \in \mathcal L$ has size $n + 1$. Suppose that for any two distinct $L, L' \in \mathcal L$, we have $|L\cap L'| \leq 1$. Prove that $(X, \mathcal L)$ is a projective plane of order $n$. 
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            To see $(X, \mathcal L)$ is a projective plane of order $n$, we shall verify the three properties of projective plane.
+            \begin{itemize}
+                \item Verify \textbf{(P2)}: We first want to prove that any pair of points will be in at most one line. Given $\{a,b\} \subseteq X$, suppose that there exists two distinct lines $L, L' \in \mathcal L$, such that $\{a,b\} \subseteq L, \; \{a,b\} \subseteq L' \implies \{a,b\} \subseteq L \cap L' \implies |L \cap L'| \geq 2$, which contradicts to $|L \cap L'| \leq 1, \; \forall L, L' \in \mathcal L, \; L \neq L'$ $\lightning$. So we see in this case $L = L'$, so ant pair of points will be in at most one line. 
+                
+                \quad We then consider whether every pair of point is in one line. We will proceed the proof via \textbf{double counting} on how many pair of points are there in $X$, and we denote such number as $N$. First we directly count via point set:
+                \[
+                N = \binom{|X|}{2} = \binom{n^2 + n + 1}{2} = \frac{(n^2+n+1)(n^2+n)}{2}
+                \]
+                Then we count via points on different lines, since there are $(n+1)$ different points on a line, we see each line will consists $\binom{n+1}{2} = \frac{n^2+n}{2}$ number of point pairs. Observe that we've seen that any point pair will occur on at most one line, so this means that the point pairs consists in different lines will be different from each other. So we then try to count the total number of point pairs contributed by all of the lines, given that $|\mathcal L| = n^2 + n + 1$, and denote such number by $N'$:
+                \[
+                    \begin{aligned}
+                        N' &= |\mathcal L| \times \binom{n+1}{2} = (n^2+n+1)\frac{n^2 + n }{2} \\
+                        \implies N &= N' 
+                    \end{aligned}
+                \]
+
+                So we see that the total number of point pairs in $X$ is exactly equal to the total number of point pairs that lie in a common line. So given any two points, such points will be lie in a line, and such line will be unique by our previous proof on uniqueness. So we see that (P2) holds in this case. $\longrightarrow$ \textbf{OK!}
+                \item Verify \textbf{(P1)}: Suppose that there exists $L_1,L_2 \in \mathcal L, \; L_1 \neq L_2$, such that $L_1 \cap L_2 = \emptyset$, then there will be $(n+1)$ distinct point on $L_1, L_2$ respectively, we denote them as $\{\alpha_0, \ldots, \alpha_n\}$ and $\{\beta_0, \ldots, \beta_n\}$ respectively. And now define $l_i := \overline{b_0a_i}, \; \forall i \in [0,n] \cap \mathbb Z$. By (P2), we now count the total number of vertices in this case:
+                \[
+                \begin{aligned}
+                    |\bigcup_{i=0}^n \overline{b_0 a_i} \cup L_1 \cup L_2| &= |\bigcup_{i=0}^n \overline{b_0 a_i} \cup L_1| \\
+                    &= |\bigcup_{i=0}^n \overline{b_0 a_i}| +  |L_1| - |(\bigcup_{i=0}^n \overline{b_0 a_i}) \cap L_1| \\
+                \end{aligned}
+                \]
+                \[
+                \begin{aligned}
+                    \implies |\bigcup_{i=0}^n \overline{b_0 a_i} \cup L_1 \cup L_2| &= ((n+1)^2 - n ) + (n+1) - 1 \\
+                    &= n^2 + 2n + 1 > n^2 + n + 1 = |X| \lightning
+                \end{aligned}
+                \]
+
+                So we see $\forall L_1, L_2 \in \mathcal L, \; L_1 \neq L_2, \; |L_1 \cap L_2| = 1$. So (P1) holds. $\longrightarrow$ \textbf{OK!}
+                \item Verify \textbf{(P0)}: We start with picking arbitrary two distinct lines $L_1, L_2 \in \mathcal L$, by (P1), we define $|L_1 \cap L_2| := \{\pi\}$, and we denote the rest points on $L_1$, $L_2$ as $\alpha_1, \ldots, \alpha_n$ and $\beta_1, \ldots, \beta_n$ respectively. And we now have $n^2$ number of lines, which is:
+                \[
+                \mathcal L_0 := \{\overline{\alpha_i \beta_j} \; | \; i,j \in [1,n] \cap \mathbb Z\}
+                \]
+
+                So far, we have $n^2 + 2$ number of lines, so there are $(n-1)$ number of lines remaining. We claim that all these $(n-1)$ lines should passing through $\pi$. Suppose that this is not the case, then we can find a line $l$, such that $l \not \in \mathcal L_0 \cup \{L_1, L_2\}$ and $a\not \in l$. We see that $|l \cap L_1| = 1, \; |l \cap L_2| = 1$ and $a \not \in l \cap L_1, \; a\not \in l \cap L_2$, which implies that $l \cap L_1 = \{\alpha_i\}, \; l \cap L_2 = \{\beta_j\}$ for some integer $i,j$. But this leads to that $\overline{\alpha_i \beta_j} = l \implies l \in \mathcal L_0$, leads to contradiction $\lightning$. So our claim holds.
+
+                \quad We then define:
+                \[
+                \mathcal L_1 := \{l \in \mathcal L\; | \; a \in l, \; l \not \in \mathcal L_0 \cup \{L_1, L_2\}\}
+                \]
+
+                Arbitrarily pick a line $l_0 \in \mathcal L_1$, and pick another point $\zeta \in l_0$, such that $\zeta \neq \pi$ and $\zeta \not \in \overline{\alpha_0 \beta_0} \cap l_0$, there are in total $(n+1)$ number of points on $l_0$, so we can always do such choosing. We claim that $F:= \{\pi, \zeta, \alpha_0, \beta_0\}$ is the 4-element points set that satisfying (P0). Note that:
+                \begin{equation}
+                \mathcal L = \mathcal L_0 \sqcup \mathcal L_1 \sqcup \{L_1, L_2\}
+                \label{eq2}
+                \end{equation}
+                \begin{itemize}
+                    \item For $l' \in \mathcal L_0$, we see that $\pi \not \in l'$, otherwise $l' \in \{L_1, L_2\}$. And by our choosing we see $\zeta \not \in \overline{\alpha_0 \beta_0}$. So we see that when $l' = \overline{\alpha_0 \beta_0}$, we have $\zeta \not \in l', \; \pi \not \in l' \implies |l' \cap F| \leq 2$. When $l' \neq \overline{\alpha_0 \beta_0}$, we have at most one element of $\{\alpha_0, \beta_0\}$ will be in $l'$, combined with that $\pi \not \in l'$, still yeilds that $|l' \cap F| \leq 2$.
+                    \item For $l' \in \mathcal L_1$, when $l' = l_0$, we see that $\zeta \in l', \; \pi \in l'$, however we see $\alpha_0, \beta_0 \not \in l'$, otherwise we will deduce that $\overline{\alpha_0 \beta_0} = l'$, leading to contradiction $\lightning$, which implies that in this case $|l' \cap F| = 2$. When $l' \neq l_0$, we see at most one element of $\{\alpha_0, \beta_0\}$ will be in $l'$, combined with that $\zeta \not \in l'$, still yields that $|l' \cap F| \leq 2$.
+                    \item For $l'\in L_1$ or $l'\in L_2$, we only consider the case $l' \in L_1$, the other case is exactly the same. In this case, we have $\alpha_0 \in L_1, \pi \in L_1$, but we see $\zeta \not \in L_1,\beta_0 \not \in L_1 \implies |L_1 \cap F| = 2 \implies |l' \cap F| \leq 2$.
+                \end{itemize}
+                Then by \textbf{Equation} \ref{eq2}, we see that $\forall \; l' \in \mathcal L, \; |l' \cap F| \leq 2$, which yields (p0). $\longrightarrow$ \textbf{OK!}
+            \end{itemize}
+
+            \quad Combining above reasoning, we see that it is indeed a finite projective plane of order $n$. \textbf{Q.E.D.}
+        \end{proof}
+    \end{solution}
+\end{questions}

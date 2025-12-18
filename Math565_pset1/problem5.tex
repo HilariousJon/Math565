@@ -1,0 +1,17 @@
+\begin{questions}
+\begin{problem}
+Let $G = (V, E)$ be a simple graph with no triangles. Prove that there is a partition $V = X\sqcup Y$ of the vertices into two disjoint parts, so that for any $x\in X$, we have $d(x) \leq |Y|$ and for any $y\in Y$, we have $d(y) \leq |X|$. Here $d(x)$ denotes the degree of a vertex $x$. Hint: Make a careful choice of a vertex $x$, and let $Y$ be its set of neighbors.
+\end{problem}
+
+\begin{solution}
+    \begin{proof}
+        Let $x_0$ be the point with the highest degree, and let $Y$ be the set of its neighbors. Since there is no triangles and it is a simple graph, any two vertex in the set $Y$ are not connected to each other, and we then gather the rest of the vertices along with $x_0$ to be the set $X$.
+
+        \quad Since $d(x_0) = |Y|$, then $\forall x \in X, d(x) \leq d(x_0) = |Y|$ by the definition of $x_0$. Then we want to see if $\forall y \in Y, d(y) \leq |X|$.
+
+        \quad And we see indeed the case! Since vertices in $Y$ are disjoint, they can only incident with vertices in $X$. And the most number vertices it can incident to is the size of the set $X$, which is $|X|$. In particular we have $d(y) \leq |X|$.
+
+        \quad So we successfully find the set $X$ and $Y$ that satisfy the requirement.
+    \end{proof}
+\end{solution}
+\end{questions}

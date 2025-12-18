@@ -1,0 +1,50 @@
+\begin{questions}
+    \begin{problem}
+         Let $(X_1, Y_1)$ and $(X_2, Y_2)$ be two mincuts. Show that $(X_1 \cup X_2, Y_1 \cap Y_2)$ is also a mincut.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Suppose that $(X_1, Y_1)$ and $(X_2, Y_2)$ are two cut separating $s$ and $t$ which are the source vertex and sink vertex respectively, we will have $s\in X_1$, $s\in X_2$ $\implies s \in X_1 \cap X_2$ and $t\in Y_1$, $t\in Y_2$ $\implies t \in Y_1 \cap Y_2$.
+            
+            \quad First we need to see that $(X_1 \cup X_2, Y_1 \cap Y_2)$ is a valid cut. Suppose that $D = X_1 \cup Y_1 = X_2 \cup Y_2$. And let $X_3 := X_1 \cup X_2$ and $Y_3 := Y_1 \cap Y_2$. Since $s\in X_1 \cap X_2 \implies s\in X_1 \cup X_2$ and $t\in Y_1 \cap Y_2$, and $D - Y_3 = D -(Y_1 \cap Y_2) = (D-Y_1) \cup (D-Y_2) = X_1 \cup X_2$, we see that it is indeed a valid cut separating $s$ and $t$.
+
+            \quad Given a maxflow $f$ on such graph, we see that by maxflow-mincut theorem, $C(X_1, Y_1) = C(X_2, Y_2) = |f|$. And by the fact that $|f| \leq C(X,Y)$ for some cut $(X,Y)$ and by:
+            \[
+            |f| = f(X,Y) - f(Y,X)\\
+            \]
+
+            \quad we see that on the between the mincut $(X_1, Y_1)$:
+            \begin{itemize}
+                \item for $e = (x,y)$ where $x \in X_1, y\in Y_1$, we have $f(e) = c(e)$.
+                \item for $e=(y,x)$ where $x\in X_1, y\in Y_1$, we have $f(e) = 0$.
+                \item In other words, those edges from $X_1$ into $Y_1$ are saturated by its flow, and those edges from $Y_1$ to $X_1$ attains $0$-flow.
+            \end{itemize}
+
+            \quad And we see such analogous statement also holds for mincut $(X_2,Y_2)$.
+
+            \quad We then consider the situation for the cut $(X_1 \cup X_2, Y_1 \cap Y_2)$:
+            \begin{itemize}
+                \item for $e = (x,y)$ where $x \in X_1 \cup X_2, y\in Y_1 \cap Y_2$, we see that either $x\in X_1$ or $x \in X_2$:
+                \begin{itemize}
+                    \item $x\in X_1$, we see that $y\in Y_1 \cap Y_2$, so $y\in Y_1$, which implies that $f(e) = c(e)$.
+                    \item $x\in X_2$, we see that $y \in Y_1 \cap Y_2$, so $y\in Y_2$, which still implies that $f(e) = c(e)$.
+                    \item In other words, those edges from $X_1 \cup X_2$ into $Y_1 \cap Y_2$ are saturated by its flow.
+                \end{itemize}
+                \item for $e = (y,x)$ where $x\in X_1 \cup X_2, y\in Y_1 \cap Y_2$, we see that either $x\in X_1$ or $x\in X_2$:
+                \begin{itemize}
+                    \item $x\in X_1$, we see that $y\in Y_1\cap Y_2$, so $y\in Y_1$, which implies that $f(e) = 0$.
+                    \item $x\in X_2$, we see that $y\in Y_1\cap Y_2$, so $y\in Y_2$, which still implies that $f(e) = 0$.
+                    \item In other words, those edges from $Y_1 \cap Y_2$ into $X_1 \cup X_2$ attains $0$-flow.
+                \end{itemize}
+            \end{itemize}
+
+            \quad So we see that $|f| = f(X_1 \cup X_2, Y_1 \cap Y_2) - f(Y_1\cap Y_2, X_1 \cup X_2) = f(X_1 \cup X_2, Y_1 \cap Y_2) = C(X_1\cup X_2, Y_1 \cap Y_2)$, which then leads to:
+            \[
+                C(X_1, Y_1) = C(X_2, Y_2) = C(X_1\cup X_2, Y_1 \cap Y_2) \\
+            \]
+
+            \quad so we see that $(X_1 \cup X_2, Y_1 \cap Y_2)$ is a mincut.
+        \end{proof}
+    \end{solution}
+\end{questions}

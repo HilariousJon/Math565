@@ -1,0 +1,75 @@
+\begin{questions}
+    \begin{problem}
+    \item[(a)] Let $L$ be a lattice. Show that for any $x, y, z \in L$, we have
+    \[ 
+    x \vee (y \wedge z) \le (x \vee y) \wedge (x \vee z)
+    \]
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            By definition, we have:
+            \[
+            \begin{aligned}
+                x &\leq x \vee y \\
+                x &\leq x \vee z \\
+                y \wedge z &\leq y \leq x \vee y \\
+                y \wedge z &\leq z \leq x \vee z \\ 
+            \end{aligned}
+            \]
+
+            which implies that:
+            \[
+            \begin{aligned}
+                x & \leq (x \vee y) \wedge (x\vee z) \\
+                y \wedge z & \leq (x \vee y) \wedge (x\vee z)\\
+                \implies x \vee (y \wedge z) &\leq (x \vee y) \wedge (x\vee z)\\
+            \end{aligned}
+            \]
+        \end{proof}
+    \end{solution}
+    \begin{problem}
+    \item[(b)] Let $L$ be a finite lattice. We say that $L$ is modular if for any $x, y, z \in L$ we have
+    \[
+    (x \wedge y) \vee (x \wedge z) = x \wedge (y \vee (x \wedge z)) 
+    \]
+    
+    Show that $L$ is modular if and only if whenever $x \le z$ we have
+    \[
+    x \vee (y \wedge z) = (x \vee y) \wedge z
+    \]
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            ($\implies$): We have $\forall \; x,y,z \in L$:
+            \[
+            (x\wedge y)\vee (x\wedge z) = x \wedge (y \vee (x \wedge z))
+            \]
+
+            substitute $x$ by $z$ and substitute $z$ by $x$ (switching the position of $x$ and $z$), we have:
+            \[
+            (z\wedge y) \vee (x \wedge z) = z \wedge (y \vee (x \wedge z))
+            \]
+
+            Notice that if $x \leq z \implies x \wedge z = x, \; x \vee z = z$, then substitute such two equation in, we have:
+            \[
+            x\vee (y\wedge z) = (x \vee y) \wedge z
+            \]
+            ($\impliedby$): Obviously, we have:
+            \[
+            x \wedge z  \leq x
+            \]
+
+            so substitute into our giving condition we have:
+            \[
+            \begin{aligned}
+            (x\wedge z) \vee (x\wedge y) &= (y\vee (x\wedge z)) \wedge x \\
+             \iff (x\wedge y) \vee (x \wedge z) &= x \wedge (y \vee (x \wedge z))
+            \end{aligned}
+            \]
+
+            which is intended.
+        \end{proof}
+    \end{solution}
+\end{questions}

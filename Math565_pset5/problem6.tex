@@ -1,0 +1,45 @@
+\begin{questions}
+    \begin{problem}
+        Let $M = U_{k,n}$ be the uniform matroid of rank $k$ on $[n] = \{1, 2, \dots, n\}$. Thus the bases of $M$ are all $k$-element subsets of $[n]$. Find the independent sets, circuits, rank function, closure operator, and flats of $U_{k,n}$.
+    \end{problem}
+
+    \begin{solution}
+    See that $U_{k,n}$ is the uniform matroid, whose bases are all $k$-elements of $[n]$. Which is:
+    \[
+        \mathcal M = U_{k,n}= \binom{[n]}{k}
+    \]
+    \begin{itemize}
+        \item \textbf{Independent sets}: The independent sets given by:
+        \[
+        \mathcal I = \{I \subseteq [n] \; | \; |I| \leq k\}
+        \]
+        \item \textbf{Circuits}: The circuits given by:
+        \[
+        \mathcal C = \{C \subseteq [n] \; | \; |C| = k+1\}
+        \]
+        \item \textbf{Rank functions}: The rank functions given by:
+        \[
+        \begin{aligned}
+            rk(S) =
+            &\begin{cases}
+                |S| \;, \; &\text{if } \; |S| \leq k \\
+                \; k \;, \; &\text{if } \; |S| > k\\
+            \end{cases}\\
+            & = \min(|S|, k)
+        \end{aligned}
+        \]
+        \item \textbf{Closure operator}: The closure operator is given by:
+        \[
+        \overline{S} = 
+        \begin{cases}
+            [n] \;, & \text{if } \; |S| \geq k \\
+            S \;, & \text{if } \; |S| < k \\
+        \end{cases}
+        \]
+        \item \textbf{Flats}: The flats are given by:
+        \[
+        \mathcal F = \{F \subseteq [n] \; | \; |F| < k\} \cup \{[n]\}
+        \]
+    \end{itemize}
+    \end{solution}
+\end{questions}

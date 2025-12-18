@@ -1,0 +1,11 @@
+\begin{questions}
+\begin{problem}
+Prove that any graph $G$ has at least $\binom{\chi(G)}{2}$ edges.
+\end{problem}
+
+\begin{solution}
+\begin{proof}
+    Suppose there exists a graph $G=(V,E)$ attains its edges less than $\binom{\chi(G}{2}$, we then properly color $G$ with (exactly) $\chi(G)$ numbers of colors. We denote the color set as $C$ and we see $|C| = \chi(G)$. We arbitrarily choose two different colors out of the color set $C$ and denote two color as $i,j\in C$, and we have in total $\binom{\chi(G}{2}$ ways of choosing. Since we suppose that $|E| < \binom{\chi(G}{2}$, by \textbf{Pigeonhole Principle}, there is the situation that $\forall x,y\in V$, who are colored in, say $i,j, i\neq j$ respectively, are not connected by any edges! Then it means we can discard either $i$ or $j$ and result in a lower color set, but this contradicts to the definition of $\chi(G)$ $\lightning$.
+\end{proof}
+\end{solution}
+\end{questions}

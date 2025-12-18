@@ -1,0 +1,40 @@
+\begin{questions}
+    \begin{problem}
+        Find the max-flow and min-cut in the following network.
+        \begin{center}
+            \includegraphics[width=0.75\linewidth]{assets/problem5.png}
+        \end{center}
+    \end{problem}
+
+    \begin{solution}
+        We will proceed the algorithm introduce in the lecture to find the max-flow and min-cut in the transportation network.
+
+        \quad First we start with a $0$-flow, and we label the vertices in the transportation network as the picture below:
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/step1.jpeg}
+        \end{center}
+
+        We start with the special path $s\to a\to b \to t$, and notice that in this case $\alpha_1 = 4, \alpha_2=5, \alpha_3 = 3 \implies \alpha = 3$, so we see $|f| = 0 + 3 = 3$, and then obtain the transportation network below, note that red number here denote the flow through corresponding edges.
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/step2.jpeg}
+        \end{center}
+
+        Choose the special path $s\to a \to b \to d \to t$, we have $\alpha_1 = 1, \alpha_2 = 2, \alpha_3 = 2, \alpha_4 = 6 \implies \alpha = 1$, then we see $|f| = 3 + 1 = 4$, and obtain the transportation network below:
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/step3.jpeg}
+        \end{center}
+
+        Choose the special path $s\to c \to a \to b \to d \to t$, we have $\alpha_1 = 6, \alpha_2 = 1, \alpha_3 = 1, \alpha_4 = 1, \alpha_5 = 5 \implies \alpha = 1$, then $|f| = 4 + 1 = 5$, and obtain the transportation network below:
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/step4.jpeg}
+        \end{center}
+
+        Choose the special path $s\to c \to d \to t$, we have $\alpha_1 = 5, \alpha_2 = 4, \alpha_3 = 4 \implies \alpha = 4$, so $|f| = 5 + 4 = 9$, and obtain the transportation network below:
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/step5.jpeg}
+        \end{center}
+
+        And we see that at this stage, there is no special path from $s$ to $t$, and we obtain a max flow, with $|f| = 9$. We see that the vertices that are reachable by $s$ through special paths are $a,c,b$, so we see we have a min cut to be $(\{s,a,b,c\}, \{t,d\})$, with $C(\{s,a,b,c\}, \{t,d\}) = 9$, and another min cut $(\{s,a,b,c,d\}, \{t\})$ with $C(\{s,a,b,c,d\}, \{t\}) = 9$.
+        
+    \end{solution}
+\end{questions}

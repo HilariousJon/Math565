@@ -1,0 +1,76 @@
+\begin{questions}
+    \begin{problem}
+    Let $G$ be a simple connected graph $G$ on $n$ vertices. Define a geometric lattice $L(G)$ whose points correspond to the edge set $E(G)$. The elements of $L$ are all partitions $\Pi$ of $V(G)$ such that the subgraph of $G$ induced by each block of $\Pi$ is connected.
+    
+    Prove that the bases of $L(G)$ are exactly the edge sets of spanning trees in $G$.
+    \end{problem}
+    \begin{solution}
+        We first state the proof for the following lemma:
+        \begin{lemma}
+            Given a finite simple connected graph $G = (V,E)$, given an arbitrary subgraph $G'$ of $G$, it is a spanning tree if and only if $G'$ is a minimal connective graph. i.e. $\forall \; e \in G'$, $G' \backslash \{e\}$ is not a connected graph.
+            \label{lem_1}
+        \end{lemma}
+        \textbf{Proof of the Lemma}
+        \begin{proof}
+            We shall proceed the proof in two direction:
+            \begin{itemize}
+                \item ($\implies$): Given $G'$ as an arbitrary spanning tree of $G$, thus we see that $V(G') = V(G)$ and there is no cycles within $G'$. Suppose that $G'$ is not a minimal connective graph, then we see that there exists $e \in E'(V)$, such that $G' \backslash \{e\}$ is still a connective graph. Without losing generality, we denote $e = (u,v)$ for some $u,v \in V(G')$. Sine $G'\backslash\{e\}$ is still a connected graph, thus there exists a path $l$ from $u$ to $v$ in the graph $G'\backslash\{e\}$. Let this path be the vertex sequence as $l=(u,v_1,v_2,\ldots,v_k,v)$, where all edges $(u,v_1), (v_1,v_2), \ldots, (v_k,v)$ are in $E(G'\backslash\{e\})$. But then $l$ combines with $e$ gives us a cycle in $G'$, contradicting the fact that $G'$ is a spanning tree $\lightning$. So $G'$ is a minimal connective graph.
+                \item ($\impliedby$): Given $G'$ as an arbitrary minimal connective subgraph of $G$, suppose that $G'$ is not a spanning tree, then there exists a cycle in $G'$. Arbitrarily pick an edge in that cycle, denoted as $e = (u,v)$, and remove it from $G'$, since $e$ is in a cycle, removing it will not affect the connectivity of the graph, so $G'\backslash \{e\}$ is still connective graph, but this contradict to the fact that $G'$ is the minimal one that is connective $\lightning$. So we see $G'$ is a spanning tree of $G$.
+            \end{itemize}
+        \end{proof}
+        
+        \textbf{Then we give the proof to the Original Statement}
+
+        \begin{proof}
+            % First consider the minimum of such geometric lattics:
+            % \[
+            % \mathbf{\hat{0}} = \{\{v\} \; | \; v \in V(G)\}
+            % \]
+            % which are essentially the partition over all the vertex. Each block only contains one vertex, and each vertex is vacuously connected. See that the atoms of such geometric lattice is defined as:
+            % \[
+            %     \Pi_{(v_i, v_j)} := \{\{v_i, v_j\} \cup \{v \; | \; v \in V(G), \; v\neq v_i,v_j\} \; | \; (i,j) \in E(G)\}
+            % \]
+
+            % Since $G$ is a simple and connected graph:
+            % \[
+            % \mathbf{\hat 1} = \{V(G)\}
+            % \]
+
+            % Given a basis of $L(G)$, denoted as $\mathcal B$. It is given by the minimum set of atoms (in this case, edges of $G$), such that their joins are $\mathbf{\hat 1}$:
+            % \begin{equation}
+            %     \bigvee_{e\in \mathcal B} \Pi_{e} = \mathbf{\hat{1}}
+            %     \label{eq_1}
+            % \end{equation}
+
+            % Let $\Pi_\mathcal B = \bigvee_{e\in \mathcal B} \Pi_{e}$, consider that $x,y \in V(G)$, $x,y$ in the same block in $\Pi \in L(G)$ if and only if there exists a path from $x$ to $y$, since the subgraph induced by each block is connected. Hence, let $e' = (x,y) \in E(G)$ and $\Pi' \in L(G)$, $\Pi' \vee \Pi_{(x,y)}$ equals to $\Pi'$ if $x,y$ is already in the same block of $\Pi'$ and otherwise we merge the blocks of $\Pi'$ where $x,y$ in to get the new partition. Thus, in each block of $\Pi_\mathcal B$ will only contain the edges $e \in \mathcal B$. We denote the subgraph of $G$ induced by $\Pi$ as $G_{\Pi}.$ By \textbf{Equation} \ref{eq_1}, there is only one block in $\Pi_{\mathcal B}$, remove any $e\in \mathcal B$, then $\Pi_\mathcal B \neq \mathbf{\hat 1} \iff |\Pi_\mathcal B| > 1$, which is equivalent to $G_{\Pi_{\mathcal B\backslash \{e\}}}$ is not connected. So we see $G_{\Pi_\mathcal B}$ is actually a minimal connected graph of $G$. By \textbf{Lemma} \ref{lem_1}, $G_{\Pi_{\mathcal B}}$ is a spanning tree of $G$ (Lemma apply since we can define geometric lattice on $G$, directly implies that $G$ is finite graph, then so is any of its subgraph). Thus $\mathcal B$ induced a spanning tree in $G$. So the bases of $L(G)$ are exactly the edge sets of spanning trees in $G$.
+            First consider the minimum of such geometric lattics:
+            \[
+            \hat{0} = \{\{v\}|v \in V(G)\} 
+            \]
+            which are essentially the partition over all the vertex. Each block only contains one vertex, and each vertex is vacuously connected. Then see that the atoms of such geometric lattice is defined as:
+            \[
+            \Pi_{(v_i, v_j)} := \{\{v_i, v_j\} \cup \{v | v \in V(G), v \ne v_i, v_j \} | (v_i, v_j) \in E(G)\}
+            \]
+            
+            Since G is a simple and connected graph:
+            \[
+            \hat{1} = \{V(G)\}
+            \]
+
+            Given a basis of $L(G)$, denoted as $\mathcal{B}$. It is given by the minimum set of atoms (in this case, edges of G), such that their joins are $\hat{1}$:
+            \begin{equation}
+            \label{eq_1}
+            \bigvee_{e \in \mathcal{B}} \Pi_e = \hat{1}
+            \end{equation}
+
+            Let $\Pi_{\mathcal{B}} = \bigvee_{e \in \mathcal{B}} \Pi_e$. Let $e' = (x, y) \in E(G)$ and $\Pi' \in L(G)$, $\Pi' \vee \Pi_{(x, y)}$ equals to $\Pi'$ if $x, y$ is already in the same block of $\Pi'$ and otherwise we merge the blocks of $\Pi'$ where $x, y$ in to get the new partition. Let $G_{\mathcal{B}} = (V, \mathcal{B})$ be the subgraph of G induced by the edge set $\mathcal{B}$. The join operation $\Pi_{\mathcal{B}}$ repeatedly merges vertex blocks. Therefore, two vertices $u, v$ are in the same block of $\Pi_{\mathcal{B}}$ if and only if there exists a path between $u$ and $v$ using only edges from $\mathcal{B}$. In other words, the blocks of $\Pi_{\mathcal{B}}$ are exactly the vertex sets of the connected components of the subgraph $G_{\mathcal{B}}$.
+            
+            By \textbf{Equation} \ref{eq_1}, $\Pi_{\mathcal{B}} = \hat{1}$, which means $\Pi_{\mathcal{B}}$ has only one block. Based on our clarification, this is equivalent to stating that the subgraph $G_{\mathcal{B}}$ is \textbf{connected}.
+            
+            Furthermore, $\mathcal{B}$ is a \textbf{minimal} set satisfying this property. This means for any $e_0 \in \mathcal{B}$, the join of the remaining atoms is not $\hat{1}$. Let $\Pi_{\mathcal{B} \setminus \{e_0\}} := \bigvee_{e' \in \mathcal{B} \setminus \{e_0\}} \Pi_{e'}$. The minimality condition ensure $\Pi_{\mathcal{B} \setminus \{e_0\}} \ne \hat{1}$. This is equivalent to saying $|\Pi_{\mathcal{B} \setminus \{e_0\}}| > 1$, which, by our definition, means the subgraph $G_{\mathcal{B} \setminus \{e_0\}}$ (induced by the edge set $\mathcal{B} \setminus \{e_0\}$) is \textbf{not connected}.
+            
+            So we see the subgraph $G_{\mathcal{B}}$ is actually a minimal connected graph of G (it is connected, but removing any edge $e_0 \in \mathcal{B}$ makes it disconnected). By \textbf{Lemma} \ref{lem_1}, $G_{\mathcal{B}}$ is a spanning tree of G (Lemma apply since we can define geometric lattice on G, directly implies that G is finite graph, then so is any of its subgraph).
+            Thus the basis $\mathcal{B}$ induced a spanning tree in G. So the bases of $L(G)$ are exactly the edge sets of spanning trees in G.
+        \end{proof}
+    \end{solution}
+\end{questions}

@@ -1,0 +1,111 @@
+\begin{questions}
+    \begin{problem}
+        Let $(X = \{x_1, x_2, \dots, x_{n^2+n+1}\}, \mathcal{L} = \{L_1, L_2, \dots, L_{n^2+n+1}\})$ be a projective plane of order $n$. Define a $(n^2+n+1) \times (n^2+n+1)$ \textit{incidence matrix} $M$ by
+            \[
+            m_{ij} = \begin{cases}
+                1 & \text{if } x_i \text{ lies on } L_j \\
+                0 & \text{otherwise.}
+            \end{cases}
+            \]
+        Show that $\det(M) = \pm(n+1)n^{(n^2+n)/2}$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            We will first calculate $MM^T$. First see that by properties of transposed matrix:
+            \[
+                (MM^T)_{ij} = \sum_{k=1}^{n^2+n+1} m_{ik}\cdot m_{kj} = \sum_{k=1}^{n^2+n+1} m_{ik}\cdot m_{jk}\\
+            \]
+
+            Then consider the value that each entries of $MM^T$ will take:
+            \begin{itemize}
+                \item When $i\neq j$: observe that $m_{ik} = 1$ iff $x_i$ lies on $L_k$, $m_{jk} = 1$ iff $x_j$ lies on $L_k$, so $m_{ik} \cdot m_{jk} = 1$ iff $x_i, x_j$ both lies on $L_k$, by the property of finite projective plane, $L_k$ will be the unique line that passing through both $x_i$ and $x_j$, in particular only one such $k$ out of the total $n^2 + n + 1$ will satisfy $m_{ik} \cdot m_{jk} = 1$, so:
+                \[
+                (MM^T)_{ij} = 1, \quad \forall i,j \in [1,n] \cap \mathbb Z, \; i\neq j
+                \]
+
+                \item When $i = j$: we have:
+                \[
+                MM^T = \sum_{k=1}^{n^2+n+1} m_{ik}\cdot m_{ik} = \sum_{k=1}^{n^2+n+1} (m_{ik})^2 = n + 1\\
+                \]
+
+                Given the fact that in a finite project plane with order $n$, each point will be contained in exactly $n+1$ lines.
+            \end{itemize}
+
+            So we see:
+            \[
+                MM^T = 
+                \underbrace{
+                    \begin{pmatrix}
+                        n+1 & 1 & \cdots & 1 \\
+                        1 & n+1 & \cdots & 1 \\
+                        \vdots  & \vdots  & \ddots & \vdots  \\
+                        1 & 1 & \cdots & n+1
+                    \end{pmatrix}
+                }_{\text{$n^2+n+1$ columns}}
+                \left. \vphantom{
+                    \begin{pmatrix}
+                        1 \\ 1 \\ \vdots \\ n+1
+                    \end{pmatrix}
+                } \right\} \text{$n^2+n+1$ rows}
+            \]
+
+            And now to compute $\det(MM^T)$, we first do elementary column operation by summing every columns to the first column, with the determinant value remain unchange, denote $w = n^2+n+1$, we get:
+            \[
+            A = \underbrace{
+                    \begin{pmatrix}
+                        n+w & 1 & \cdots & 1 \\
+                        n+w & n+1 & \cdots & 1 \\
+                        \vdots  & \vdots  & \ddots & \vdots  \\
+                        n+w & 1 & \cdots & n+1
+                    \end{pmatrix}
+                }_{\text{$n^2+n+1$ columns}}
+                \left. \vphantom{
+                    \begin{pmatrix}
+                        1 \\ 1 \\ \vdots \\ n+1
+                    \end{pmatrix}
+                } \right\} \text{$n^2+n+1$ rows}
+            \]
+
+            and $\det(MM^T) = \det A$. We further see that:
+            \[
+            A = (n+w)
+                    \begin{pmatrix}
+                        1 & 1 & \cdots & 1 \\
+                        1 & n+1 & \cdots & 1 \\
+                        \vdots  & \vdots  & \ddots & \vdots  \\
+                        1 & 1 & \cdots & n+1
+                    \end{pmatrix}
+            =: (n+w) B
+            \]
+
+            and then we operate on $B$ by doing elementary row operation, subtracting every row by the first row, we then get:
+            \[
+            C = \begin{pmatrix}
+                    1 & 1 & \cdots & 1 \\
+                    0 & n & \cdots & 0 \\
+                    \vdots  & \vdots  & \ddots & \vdots  \\
+                    0 & 0 & \cdots & n
+                \end{pmatrix}
+            \]
+
+            and we see: 
+            \[
+            \begin{aligned}
+                \det B &= \det C = n^{w - 1} \\
+                \implies \det A & = (n+w) \det B = (n+w) n^{w-1} \\
+                \implies \det (M&M^T) = \det A \\
+            \end{aligned}
+            \]
+
+            Then we see:
+            \[
+            \begin{aligned}
+                \det (MM^T) &= \det M \cdot \det M^T = (\det M)^2 = (n+w)n^{w-1} \\
+                \implies \det M &= \sqrt{(n^2+2n+1)n^{n^2 + n}} = \pm (n+1) n^{(n^2+n)/2}
+            \end{aligned}
+            \]
+            \textbf{Q.E.D.}
+        \end{proof}
+    \end{solution}
+\end{questions}

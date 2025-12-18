@@ -1,0 +1,54 @@
+\begin{questions}
+    \begin{problem}
+        Let $L$ be a finite geometric lattice. Prove that $L$ is \textbf{graded}: for any $x \le y$ in $L$, any two maximal chains from $x$ to $y$ have the same length. You must prove this directly from the axioms of a geometric lattice; do not use the correspondence with combinatorial geometries or matroids proved in class.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            It is sufficient to proceed the induction on the following statement $P(n)$: for any interval $[x,y]$ in $L$, if there exists one maximal chain from $x$ to $y$ whose length is $n$, then all the maximal chain from $x$ to $y$ attain their length to be $n$.
+            \begin{itemize}
+                \item \textbf{Base case}: 
+                    \begin{itemize}
+                        \item $\mathbf{P(0)}$: If there exists a maximal chain with length $0$ from $x$ to $y$, it just means that $x=y$, statement trivially holds.
+                        \item $\mathbf{P(1)}$: If there exists a maximal chain with length $1$, which means that $x\lessdot y$, see that any maximal chain from $x$ to $y$ will be at least $x\lessdot y$. But if its length is bigger than $1$, say $x < z < y$, then contradicting to the fact that $y$ is a cover of $x$ $\lightning$. So $x \lessdot y$ is the only maximal chain, with length $1$, so $P(1)$ holds.
+                    \end{itemize}
+                \item \textbf{Inductive case}: Suppose that $P(k)$ holds for all $k < n$, with $n \geq 2$, we want to see that $P(n)$ also holds. Given two arbitrary maximal chain from $x$ to $y$, denoted as $C_1$ and $C_2$, with length to be $n$ and $m$ respectively:
+                \[
+                    \begin{aligned}
+                        C_1 : x &= c_0 \lessdot\ldots \lessdot c_n = y \\
+                        C_2 : x &= d_0 \lessdot\ldots \lessdot d_m = y \\
+                    \end{aligned}
+                \]
+
+                And we see either $c_1 = d_1$ or $c_1 \neq d_1$:
+                \begin{itemize}
+                    \item If $\mathbf{c_1 = d_1}$: Then we see $c_1\lessdot \ldots \lessdot c_n = y$ is a maximal chain in $[c_1,y]$ with length $n-1$. By inductive hypothesis, every maximal chain in $[c_1,y]$ will have the length to be $n-1$, and notice that $d_1 \lessdot \ldots \lessdot d_m = y$ is also a maximal chain in $[c_1,y]$, with length $m-1 \implies m-1 = n - 1 \implies m = n$.
+                    \item If $\mathbf{c_1 \neq d_1}$: Notice that $x \lessdot c_1$ and $x \lessdot d_1$, by semimodularity, we see $c_1 \lessdot c_1\vee d_1$ and $d_1 \lessdot c_1 \vee d_1$. Consider the interval $[c_1\vee d_1, y]$, choose arbitarry a maximal chain from $c_1\vee d_1$ to $y$ in $[c_1\vee d_1, y]$, with length to be $l$, and denote it as $C_3$:
+                    \[
+                        C_3: c_1 \vee d_1 = e_0 \lessdot e_1 \lessdot \ldots \lessdot e_l = y
+                    \]
+
+                    Now we construct to maximal chain from $x$ to $y$, by concatenating $x, c_1$ and $C_3$ and $x, d_1$ and $C_3$:
+                    \[
+                    \begin{aligned}
+                    C_a: x &\lessdot c_1 \lessdot e_0 \lessdot \ldots \lessdot e_l = y \\
+                    C_b: x &\lessdot d_1 \lessdot e_0 \lessdot \ldots \lessdot e_l = y \\
+                    \end{aligned}
+                    \]
+
+                    We then consider the the interval $[c_1,y]$, since we already have the maximal chain $c_1 \lessdot \ldots \lessdot c_n = y$, with length to be $n-1$, but we also have the maximal chain $c_1 \lessdot e_0 \lessdot \ldots \lessdot e_l = y$, with length $l+1$. By induction hypothesis, these two maximal chain has the same length, see that $n-1 = 1+l$.
+
+                    Then consider the interval $[d_1,y]$, similarly we shall see that $m-1=l+1$.
+
+                    Thus we see:
+                    \[
+                        m = n
+                    \]
+                \end{itemize}
+
+                In either case, we see $m=n$, which shows that the inductive case $P(n)$ also holds.
+            \end{itemize}
+            And $P(n)$ holds for all $n \in \mathbb N$, since we've seen before in \textbf{Problem} \ref{pb_1}, $[x,y]$ is a geometric lattice, thus there is no infinite chain in $[x,y]$, thus no infinite maximal chain, so our statement directly give the proof for the original statement.
+        \end{proof}
+    \end{solution}
+\end{questions}

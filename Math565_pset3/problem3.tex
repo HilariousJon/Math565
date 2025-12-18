@@ -1,0 +1,26 @@
+\begin{questions}
+    \begin{problem}
+        Let S be the set $\{1, 2, \ldots , mn\}$. We partition $S$ into $m$ sets $A_1, \ldots, A_m$ of size $n$. We also partition $S$ into $m$ sets of $B_1, \ldots , B_m$ of size $n$. Show that the sets $A_i$ can be renumbered so that $A_i \cap B_i\neq \emptyset$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            We can construct a graph, whose vertices correspond to $A_1, \ldots, A_m$ and $B_1, \ldots, B_m$, and we connect two vertices if their corresponding sets' intersection is not empty, and if their corresponding sets' intersection is empty, we don't connect. It immediately follows that $\forall i,j \in [1,m], i \neq j$:
+            \[
+            \begin{aligned}
+                A_i \cap A_j &= \emptyset \\
+                B_i \cap B_j &= \emptyset \\
+            \end{aligned}
+            \]
+
+            \quad since we construct such sets by partitioning $S$. So we see $G$ is a bipartite graph, with $A = \{A_1, \ldots, A_m\}, B = \{B_1, \ldots, B_m\}$, and $G = A \sqcup B$. To see that the sets $A_i$ can be renumbered so that $A_i \cap B_i \neq \emptyset$, it is equivalent to show that there exists a complete matching from $A$ to $B$ in this situation.
+
+            \quad We then want to check if $\forall C \subset A, |\Gamma(C)| \geq |C|$. We then define that $D := \bigcup_{A_i \in C} A_i$, and we see that $|D| = |C| \cdot n$, by the fact that $A_i$ are disjoint, with each of its cardinality to be $n$. Since $B_j, \forall j \in [1,m]$ are all disjoint, we will need at least $|C|$ number of block $B_j$ to cover all these $|C| \cdot n$  elements, by the fact that $B_j$ are also disjoint, with each of its cardinality to be $n$. In particular, we see that if we use at least $|C|$ number of $B_j$ to cover these elements, we have for each $B_j$, $B_j \cap A_k \neq \emptyset$ for some $A_k \in C$, which means they are connected by an edge by our construction of the bipartite graph $G$. In particular we see that this leads to:
+            \[
+            |\Gamma(C)| \geq |C| \\
+            \]
+
+            \quad So by Hall's marriage theorem, there exists a complete matching from $A$ to $B$, so the proof is done.
+        \end{proof}
+    \end{solution}
+\end{questions}

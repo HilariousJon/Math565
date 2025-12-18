@@ -1,0 +1,41 @@
+\begin{questions}
+    \begin{problem}
+    \label{pb_1}
+    Let $\mathcal{M}$ be a matroid of rank $k$ on the set $X$. Recall that a set $A \subset X$ is \textbf{independent} if it is a subset of some basis of $\mathcal{M}$.
+
+    \begin{enumerate}
+        \item[(a)] Let $S \subset X$ be a nonempty subset. Show that the maximal (under inclusion) independent subsets of $S$ all have the same cardinality.
+    \end{enumerate}
+    \end{problem}
+
+    \begin{lemma}
+        Let $\mathcal I$ to be the set of all the independent sets for matroid $\mathcal M$. If $I_1$ and $I_2$ are in $\mathcal I$ and $|I_1| < |I_2|$, then there is an element $e$ of $I_2\backslash I_1$, such that $I_1 \cup e \in \mathcal I$.
+        \label{lem_1}
+    \end{lemma}
+    
+    \begin{solution}
+    
+    \textbf{Proof of Lemma \ref{lem_1}: }
+    \begin{proof}
+        Given $I_1$ and $I_2 \in \mathcal I$, with $|I_1| < |I_2|$. By definition of independent set, there exists $\mathcal B_1, \mathcal B_2 \in \mathcal M$, such that $I_1 \subseteq \mathcal B_1$ and $I_2 \subseteq \mathcal B_2$. We first try to exchange iteratively the elements in $\mathcal B_2 \backslash I_2$ into elements of $I_1$: By exchange axiom, for $b \in \mathcal B_2 \backslash I_2$, there exists $a \in \mathcal B_1$, such that $(\mathcal B_2 - \{a\}) \cup \{b\} \in \mathcal M$, evidently, $b\not\in I_1 \cap I_2$. We iteratively doing this for all elements in $\mathcal B_2\backslash I_2$, and get $\mathcal B'_2 \in \mathcal M$, with the result that $\mathcal B'_2 \backslash I_2 \subseteq \mathcal B_1$, and in particular, $\mathcal B_2' = (\mathcal B_2'\backslash I_2) \sqcup I_2$, and evidently, $(\mathcal B_2' \backslash I_2) \cap (I_1 \cap I_2) = \emptyset$. Now we apply exchange axiom for $\mathcal B_1$ and $\mathcal B_2'$. Since $|I_1| < |I_2|$ and $|\mathcal B_1| = |\mathcal B_2| \implies |\mathcal B_1 \backslash I_1| > |\mathcal B_2' \backslash I_2|$ and $\mathcal B_2' \backslash I_2 \subseteq \mathcal B_1$, by \textbf{Pigeonhole Principle}, there exists $i \in \mathcal B_1 \backslash I_1$, such that $i\not \in \mathcal B_2'\backslash I_2$. We apply exchange axiom to such element $i \in \mathcal B_1$: $i$ can not exchange element $j\in \mathcal B_2'\backslash I_2$ since they are already in $\mathcal B_1$, $i$ can not exchange element $j \in I_1 \cap I_2$ since $I_1 \cap I_2 \subseteq I_1 \subseteq \mathcal B_1$. So $i$ can only exchange element  $e\in I_2 - I_1$, and get $\mathcal B_1' \in \mathcal M$, evidently $e\not \in I_1$. And we see $I_1 \cup \{e\} \subseteq \mathcal B_1' \in \mathcal M \implies I_1 \cup \{e\} \in \mathcal I$.
+    \end{proof}
+
+    \textbf{Proof of Problem \ref{pb_1}:}
+        \begin{proof}
+            Given $I_1, I_2 \in \mathcal I$ to be two distinct maximal independent subsets of $S$. Suppose that $I_1$, $I_2$ has different cardinality. Without losing generality, suppose that $|I_1| > |I_2|$, by \textbf{Lemma} \ref{lem_1}, there exists $e\in I_1 \backslash I_2$, such that $I_2 \cup \{e\} \in \mathcal I$. But see that $I_2 \subseteq S, e \in I_1 \subseteq S \implies I_2 \cup \{e\} \subseteq S$, but $|I_2 \cup \{e\}| > |I_2|$, contradict to the maximality of the cardinality of $I_2$ $\lightning$. So we see all maximal independent subsets of $S$ all have the same cardinality.
+        \end{proof}
+    \end{solution}
+
+    \begin{problem}
+    Same setting as \textbf{Problem} \ref{pb_1}:
+    \begin{enumerate}
+        \item[(b)] Show that these maximal independent subsets form a matroid $\mathcal{M}|_S$ on $S$, that is, they satisfy the exchange axiom.
+    \end{enumerate}
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Lets fix $I, J \in \mathcal I$ to be two different maximal independent subset of $S$. $\forall \; i \in I$, define $I_i = I \backslash\{i\}$, with $|I_i| = k-1$. See that $|J| = k > |I_i|$, then by \textbf{Lemma} \ref{lem_1}, there exists $j \in J\backslash I_i$, such that $I_i \cup j \in \mathcal I$, with $|I_i \cup j| = k$ and $j \in J \subseteq S \implies I_i \cup j \in \mathcal M|_S$. But then $I_i \cup j = (I-\{i\}) \cup \{j\} \in \mathcal M|_S$, which satisfy the exchange axiom and thus $\mathcal M|_S$ is a matroid.
+        \end{proof}
+    \end{solution}
+\end{questions}

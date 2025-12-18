@@ -1,0 +1,50 @@
+\begin{questions}
+\begin{problem}
+Prove that $N(4, 4; 2) = 18$.    
+\end{problem}
+
+\begin{solution}
+    \begin{proof}
+        To see it, we first want to see if for a $K_{18}$, we will color it with blue and red, in particular two different colors, then we see if we can obtain either a red $K_4$ or a blue $K_4$ as subgraph. Then we want to see that for a two-colored $K_{17}$, there exists a concrete counterexample that the graph will not induce either a red $K_4$ or a blue $K_4$ as subgraph.
+
+        \quad Note that previously in the lecture, we have seen that:
+        
+        \[
+            \begin{aligned}
+                N(3,4;2) &= 9 \\
+            \end{aligned}
+        \]
+
+        \quad And we setup our $K_{18} = (V_1, E_1)$ and $K_{17} = (V_2,E_2)$ by coloring their edges in either blue or red color.
+        \begin{itemize}
+            \item $\mathbf{K_{18}}$ \textbf{works}:
+                We arbitrarily pick a vertex $A\in V_1$, by definition of a complete graph it will adjacent to $17$ other vertices, thus will induce $17$ edges. By \textbf{Pigeonhole Principle}, in this $17$ edges, either:
+
+                \[
+                \begin{aligned}
+                    \#(\text{red edges}) &\geq 9 \\
+                    \#(\text{blue edges}) &\geq 9 \\
+                \end{aligned}
+                \]
+
+                So we then look into this two cases:
+                \begin{enumerate}
+                    \item $\textbf{\#(red edges)} \mathbf{\geq 9}$: We then denote all the adjacent vertices with red edges connected to $A$ along with A to be the vertex set $P$, in particular $|P| = 10 > N(3,4;2) = 9$. Then by \textbf{Ramsey's Theorem}, in this subgraph induced by vertex set $P$, either there is a red $K_3$ or there is a blue $K_4$. And this $K_3$ along with $A$ will form another red $K_4$ since the vertices in this $K_3$ all connect with $A$ with red edges. So for the whole $K_{18}$, there exists either a red $K_4$ or a blue $K_4$ as subgraph.
+                    \item \textbf{\#(blue edges)} $\mathbf{\geq 9}$: The argument is the same as what we prove for the case $\textbf{\#(red edges)} \mathbf{\geq 9}$ based on the fact that $N(3,4;2) = N(4,3;2) = 9$.
+                \end{enumerate}
+                So we see that $K_{18}$ indeed works, in particular we have proven:
+                \[
+                N(4,4;2) \leq 18
+                \]
+            \item $\mathbf{K_{17}}$ \textbf{doesn't work}: We shall construct a counterexample that shows in $K_{17}$ there exists a special coloring that contains no red $K_{4}$ and blue $K_{4}$ as subgraph. In particular this leads to $N(4,4;2) \neq 17$. We proceed our construction as follows:
+
+            \quad Given a $K_{17}$, we label each vertices as $0,1,2, \ldots,16$. Given $\forall i, j \in \{0,1,\ldots, 16\}$, if $\min\{|i-j|, 17 - |i-j|\} \in \{1,2,4,8\}$, we will color such edges in \textbf{red}, and if $\min\{|i-j|,17 - |i-j|\} \in \{3, 5, 6, 7\}$, we will color such edges in \textbf{blue}. And one can verify that such construction contains no blue $K_4$ and red $K_4$. A picture of such construction can be find in following picture, and is enumerated to be correct by code simulation, the python source code of the code simulation can be found at the \textbf{Appendix}.
+        \end{itemize}
+        \begin{center}
+            \includegraphics[width=0.5\linewidth]{assets/k17_graph.png}
+        \end{center}
+
+        \quad By above reasoning, we see that indeed $N(4,4;2) = 18$.
+    \end{proof}
+\end{solution}
+\end{questions}

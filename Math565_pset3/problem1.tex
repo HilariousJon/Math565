@@ -1,0 +1,64 @@
+\begin{questions}
+    \begin{problem}
+        Let $(A_1, A_2, \ldots, A_n)$ be a family of sets with a system of distinct representatives. Let $a \in A_1$. Prove that there is an SDR containing $a$, but show by example that it may not be possible to find an SDR $(a_1, \ldots, a_n)$ in which $a_1 = a$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Since we know that $(A_1, A_2, \ldots, A_n)$ be a family of sets with a system of distinct representatives, which leads to the fact that \textbf{Hall's Condition} holds for $(A_1, A_2, \ldots, A_n)$. In particular, $\forall k \in [1,n]$, with $\forall i_1 < \ldots < i_k$, see that:
+            \[
+            |A_{i_1} \cup \ldots \cup A_{i_k}| \geq k \\
+            \]
+
+            \quad Consider the following case of where is $a$:
+            \begin{itemize}
+                \item If $a$ is in any kind of critical block, which is $\exists k_0$, s.t. 
+                \[
+                |A_{j_1} \cup \ldots \cup A_{j_{k_0}}| = k_0
+                \]
+
+                with $a \in A_{j_1} \cup \ldots \cup A_{j_{k_0}}$, see that in this situation $a$ must be in any SDR of $( A_{1}, \ldots, A_n)$, which is by the fact that any SDR for the entire family must assign $k_0$ distinct representatives to the subfamily $A_{j_1}, \ldots, A_{j_{k_0}}$, by definition, these representatives must be chosen from the union $U=A_{j_1} \cup \ldots \cup A_{j_{k_0}}$. Since the size of this union is exactly $k_0$, the set of the $k_0$ required representatives must be identical to the set $U$ itself. Provided that $a\in U$, it follows that $a$ must be in the SDR of $(A_1, \ldots, A_n)$.
+                \item If $a$ is not in any kind of critical block. We then consider $a \in A_1$, and we shall denote $A_i(a) := A_i - \{a\}$. Given $k \in [1,n-1]$, with $\forall 1 <i_1 < \ldots < i_k$, with the Hall's Condition followed by:
+                \[
+                    |A_{i_1} \cup \ldots \cup A_{i_k}| \geq k \\
+                \]
+
+                If it is a critical block, we see:
+                \[
+                    |A_{i_1} \cup \ldots \cup A_{i_k}| = k \\
+                \]
+
+                And after excluding $a$, it will still satisfy Hall's Condition, since $a$ is not in any kinds of critical block:
+                \[
+                    |A_{i_1}(a) \cup \ldots \cup A_{i_k}(a)| = k \\
+                \]
+
+                If it is not a critical block, see that:
+                \[
+                    |A_{i_1} \cup \ldots \cup A_{i_k}| > k \\
+                \]
+
+                and thus:
+                \[
+                    |A_{i_1}(a) \cup \ldots \cup A_{i_k}(a)| \geq k \\
+                \]
+
+                So Hall's Condition will holds for $(A_2, \ldots, A_n)$, and in particular it will attains a SDR as $(a_2, \ldots, a_n)$, and we now add back $a$ in as the representative of $A_1$ and we shall thus find a SDR of $(A_1, \ldots, A_n)$ as $(a, a_2, \ldots, a_n)$.
+            \end{itemize}
+
+            \quad We now give an example to show tha it may not be possible to find an SDR $(a_1, \ldots, a_n)$:
+
+            \quad Consider $A_1, A_2, A_3, A_4$ defined as follows:
+            \[
+            \begin{aligned}
+                A_1 &= \{a, b\} \\
+                A_2 &= \{a, c\} \\
+                A_3 &= \{c, d\} \\
+                A_4 &= \{c, d\} \\
+            \end{aligned}
+            \]
+
+            For such cases all possible SDR will be $(a_1, a_2, a_3, a_4) = (b, a, c, d)$ or $(b, a, d, c)$, and then one shall see that $a \in A_1$ but $a \neq a_1$
+        \end{proof}
+    \end{solution}
+\end{questions}

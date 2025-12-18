@@ -1,0 +1,18 @@
+\begin{questions}
+    \begin{problem}
+        Let $A_i$, $1 \leq i \leq k$ be distinct subsets of $\{1, 2,\ldots , n\}$. Suppose that $A_i \cap A_j \neq \emptyset$ for all $i$ and $j$. Show that $k \leq 2^{n-1}$ and give an example where equality occurs.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            First see that there are in total $2^n$ number of subsets of the set $B := \{1,2,\ldots,n\}$. Consider arbitrary a set $A \in B$, we see that $A \cap \overline{A} = \emptyset$. Lets say we have a collection of distinct subsets $A_i \in B$, such that $A_i \cap A_j \neq \emptyset$ for all $i$ and $j$. If the size of the collection is larger than $2^{n-1}$, by pigeonhole principle, we see that there must exists a set $A_l$ in such collection, with $\overline{A_l}$ also in this collection. But we see this leads to contradiction, as $A_l \cap \overline{A_l} = \emptyset$. So we see that $k \leq 2^{n-1}$. 
+
+            \quad We now give an example on how such equality will occur. In the situation when $n$ is odd number, we shall write it as $n = 2p+1$ for some $p \in \mathbb N$. We see that all subsets of $B$ whose cardinality is bigger or equal to $p+1$ satisfy the requirement. We see that by pigeonhole's principle, any two of such sets will attain its intersection non-empty, and the total number of such sets are:
+            \[
+            \binom{n}{p+1} + \binom{n}{p+2} + \ldots + \binom{n}{n} = 2^{n-1}
+            \]
+
+            \quad and we see this is an example where equality occurs.
+        \end{proof}
+    \end{solution}
+\end{questions}

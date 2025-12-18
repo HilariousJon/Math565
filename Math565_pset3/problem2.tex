@@ -1,0 +1,47 @@
+\begin{questions}
+    \begin{problem}
+        A \textit{perfect} matching in a (possibly not bipartite) graph is a collection of edges so that every vertex is incident to one edge of the matching.
+
+        \quad (a) Show that a finite regular bipartite graph of degree $d>0$ has a perfect matching.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            We assume that $G = X \sqcup Y$ to be such finite regular bipartite graph of degree $d>0$. We first want to see that $|X| = |Y|$. And we shall reasoning by contradiction, suppose that $|X| \neq |Y|$, the in degree of the component $X$ or say edges connected to the component $X$ will be $|Y|\cdot d$ by the definition of regular bipartite graph. Since the graph is regular, each vertex in $|X|$ will connect to $\frac{|Y| \cdot d}{|X|} \neq d$ $\lightning$, which leads to contradiction. So we see that $|X| = |Y|$.
+
+            \quad To see if there is a matching between $X$ and $Y$, we shall see if $\forall A \subset X, |\Gamma(A)| \geq|A|$. We shall proof this by contradiction. Suppose there $\exists A \subset X$, s.t. $|\Gamma(A)| < |A|$, we denote $|A| = k$, $|\Gamma(A)| = g$. The total number of edges connected to $\Gamma(A)$ will be at least $k\cdot d$. But since by definition the total number of edges connected to $\Gamma(A)$ must be $g\cdot d$ by regularity, and $g \cdot d < k \cdot d$ $\lightning$, this leads to contradiction. So we see that indeed $\forall A \subset X, |\Gamma(A)| \geq |A|$. By Hall's marriage theorem, we see there is a complete matching from $X$ to $Y$, and since $|X| = |Y|$, such matching will be perfect.
+        \end{proof}
+    \end{solution}
+    
+    \begin{problem}
+        (b) Find a simple graph, regular of degree 3, that does not have a perfect matching.
+    \end{problem}
+
+    \begin{solution}
+        \begin{center}
+            \includegraphics[width=0.7\linewidth]{assets/regular_3.png}
+        \end{center}
+        Above is a simple graph, regular of degree $3$, and we claim there is no way to find a perfect matching. Consider the vertex $B$, there will possibly 3 way of matching for $B$:
+        \begin{itemize}
+            \item Consider matching for $(B,E)$ or $(B,F)$, then there will be no matching with the polygon $BEGHF$ since exclude out two vertices will only have three vertices remain, which is odd number, and cannot have a matching.
+            \item Consider matching for $(B,A)$. Then the rest of the two polygon $DJLKI$ and $CNPOM$ will be isolated into two disjoint component, each of them consists of $5$ vertices, which is odd number, and thus cannot have a matching.
+        \end{itemize}
+
+        \quad So we see that the graph we given indeed exists no perfect matching.
+    \end{solution}
+    
+    \begin{problem}
+        (c) Suppose $G$ is bipartite with parts $X$ and $Y$. Further assume that every vertex in $X$ has the same degree $s > 0$ and every vertex in $Y$ has the same degree $t$. Prove that if $s \geq t$, then there is a complete matching $M$ of $X$ into $Y$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            We want to see if $\forall A \subset X, |\Gamma(A)| \geq |A|$. We will give the reasoning by contradiction. Suppose that there exists $A\subset X$, s.t. $|\Gamma(A)| < A$ and suppose that $|A| = k, |\Gamma(A)| = g$, the total edges connected to $|\Gamma(A)|$ will be at least $s \cdot k$. Then we see:
+            \[
+                t \cdot g < t \cdot k \leq s \cdot k
+            \]
+
+            By Pigeonhole Principle, there must exists one vertex in $\Gamma(A)$ such that this vertex attains degree bigger than $t$, which leads to contradiction. So no such $A$ exists, leading to $\forall A \subset X, |\Gamma(A)| \geq |A|$. By Hall's marriage theorem, we see there is a complete matching from $X$ to $Y$.
+        \end{proof}
+    \end{solution}
+\end{questions}

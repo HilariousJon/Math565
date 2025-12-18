@@ -1,0 +1,64 @@
+\begin{questions}
+    \begin{problem}
+        Let $(X, \mathcal{F})$ be a combinatorial geometry. A \textbf{basis} $B$ of a flat $F$ is an independent set $B \subseteq F$ such that $\overline{B} = F$.
+
+        Now let $F$ be a flat of a combinatorial geometry and suppose $B \subseteq F$ satisfies $\overline{B} = F$ and $B$ is minimal satisfying this property. Show that $B$ is a basis of $F$.
+    \end{problem}
+
+    \begin{solution}
+        First note the definition of \textit{independent set} and \textit{closure} from the \textbf{Textbook}:
+        \begin{definition}
+            For a subset $S$ of the points of a combinatorial geometry, the \textit{closure} $\overline{S}$ is the intersection of all flats containing $S$, in particular:
+            \[
+            \overline{S} := \bigcap_{F\in \mathcal F, S \subseteq F} F
+            \]
+        \end{definition}
+
+        \begin{definition}
+            A subset $S\subseteq X$ is a \textit{independent set} when for each $x\in S, x\not \in \overline{S \backslash \{x\}}$.
+        \end{definition}
+
+        And then we shall have the following small Lemma:
+        \begin{lemma}
+            Given two subsets $S \subseteq S' \subseteq X$, we have:
+                \[
+                \overline{B} \subseteq \overline{B'}
+                \]
+            and
+                \[
+                \overline{B} = \overline{\overline{B}}
+                \]
+            \label{lem_3}
+        \end{lemma}
+
+        \textbf{Proof of the Lemma:}
+        \begin{proof}
+            $\forall \; b \in B$, since $B \subseteq B'$, see that:
+            \[
+            \begin{aligned}
+                b \in \bigcap_{F\in \mathcal F, B\subseteq F} F&\implies b \in \bigcap_{F\in\mathcal F, B'\subseteq F} F = \overline{B'} \\
+                \implies b &\in \overline{B'}
+            \end{aligned}
+            \]
+
+            So we see $\overline{B} \subseteq \overline{B'}$. 
+
+            \quad Clearly by definition, we have $\forall \; S \subseteq X$, $S \subseteq \overline{S}$. Denote $K:= \overline{B}$, and we want to see $\overline{K} = K$. Clearly, we have $K \subseteq \overline{K}$, and we see:
+            \[
+            \overline{K} = \bigcap_{F\in\mathcal F, K=\overline{B} \subseteq F} F
+            \]
+
+            But we see by the axiom of combinatorial geometry, $K= \overline{B}$ it self is a flat, since it is the intersection of several flats. So:
+            \[
+            \overline{K} = \bigcap_{F\in\mathcal F, K=\overline{B} \subseteq F} F = \bigcap_{F\in\mathcal F, K=\overline{B} \subsetneq F} F \cap \overline{B} \implies \overline{K} \subseteq \overline{B} = K  
+            \]
+
+            So $\overline{K} = K$, which is intended.
+        \end{proof}
+
+        \textbf{Proof of the Original Statement:}
+        \begin{proof}
+            Given $F$ to be the flat of a combinatorial geometry, and suppose $B \subseteq F$ satisfies that $\overline{B} = F$ and $B$ is the minimal satisfying this property. Now suppose that $B$ is a dependent set, then there exists $b \in B$, such that $b\in \overline{B\backslash\{b\}}$. Denote $B' := B\backslash \{b\}$. Clearly we have $B' \subseteq \overline{B'}, b \in \overline{B'}$, which implies that $B = B'\cup \{b\} \subseteq \overline{B'}$. Thus by \textbf{Lemma} \ref{lem_3}, $\overline{B} \subseteq\overline{\overline{B'}} = \overline{B'}$, and $B' \subseteq B \implies \overline{B'} \subseteq \overline{B}$. So we see $\overline{B'} = \overline{B} = F$. But since $B' = B\backslash\{b\}$, which contradicts to the minimality of $B$ $\lightning$. So we see $B$ is indeed an independent set, and thus a basis of flat $F$.
+        \end{proof}
+    \end{solution}
+\end{questions}

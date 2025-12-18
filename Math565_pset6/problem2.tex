@@ -1,0 +1,39 @@
+\begin{questions}
+    \begin{problem}
+    Let $v_1, v_2, \ldots, v_n \in \mathbb{R}^k$, and assume that these vectors span $\mathbb{R}^k$. Show that the set
+    \[
+    \mathcal{M} := \{\{i_1, \ldots, i_k\} \mid v_{i_1}, \ldots, v_{i_k} \text{ is a basis for } \mathbb{R}^k\}
+    \]
+    
+    is a matroid of rank $k$ on $[n]$.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            Let's fix $I, J \in \mathcal M$, and denote:
+            \[
+            \begin{aligned}
+                I &:= \{v_{e_1}, \ldots, v_{e_k}\} \\
+                J &:= \{v_{f_1}, \ldots, v_{f_k}\} \\
+            \end{aligned}
+            \]
+
+            For $v_{e_j} \in I$ for some $j\in[k]$, see that:
+            \[
+            \dim(span(\{v_{e_i} \; | \; i \neq j\})) = k-1
+            \]
+
+            Since $\{v_{e_1}, \ldots, v_{e_k}\}$ forms a basis for $\mathbb R^k$. But then by definition:
+            \[
+            \dim (span(\{v_{f_1}, \ldots, v_{f_k}\})) = \dim (\mathbb R^k) = k
+            \]
+
+            So there exists $v_{f_l} \in \mathbb R^k$ for some $l\in[k]$, such that $v_{f_l} \not \in span({v_{e_i} \; | \; i \neq j})$. So $\{v_{e_i} \; | \; i \neq j\} \cup \{v_{f_l}\}$ is linearly independent, with cardinality to be $k$, thus be a basis. So we see:
+            \[
+            (I-\{v_{e_j}\}) \cup \{v_{f_l}\} = \{v_{e_i} \; | \; i \neq j\} \cup \{v_{f_l}\} \in \mathcal M
+            \]
+
+            which satisfy the exchange axiom, so $\mathcal M$ is a matroid.
+        \end{proof}
+    \end{solution}
+\end{questions}

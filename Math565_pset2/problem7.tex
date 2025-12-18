@@ -1,0 +1,109 @@
+\begin{questions}
+\begin{problem}
+Let $G$ be a $n$-vertex, triangle-free, simple planar graph such that $n\geq3$. Show that $\#E \leq 2n-4$.
+\end{problem}
+
+\begin{solution}
+Before we proceed the proof we shall proof the a lemma first:
+\begin{lemma}
+Given $G=(V,E)$ to be a planar graph, and we denote $\#F$ to be the total number of faces of $G$, $\#E$ to be the total number of edges of $G$, we denote $F_i$ for some integer $i \in [3,n]$ to be the $i$-gon face in $G$. Then we have:
+
+\begin{equation}
+\sum_{i=3}^{n}iF_i = 2\#E \\
+\label{eq5}
+\end{equation}
+
+and 
+\begin{equation}
+    \label{eq6}
+    \sum_{i=3}^{n}F_i = \#F \\
+\end{equation}
+\label{lem3}
+\end{lemma}
+
+\begin{proof}
+    In a planar graph, every edges correspond to two faces, which stays along different sides of the edge. Thus we have:
+    \[
+    \sum_{\text{faces}}\#(\text{sides of the faces}) = 2\#E \\
+    \]
+
+    \quad and by defnition we see:
+    \[
+    \sum_{i\geq 3} iF_i = 2\# E \\
+    \]
+
+    \quad and since we only attains $n$ vertices, so there exists an upper bound as $n$-gon, so we have:
+    \[
+    \sum_{i\geq 3} iF_i = 2\#E \\
+    \]
+    
+    \quad which is exactly \textbf{Equation} \ref{eq5}. And \textbf{Equation} \ref{eq6} is obvious followed by the total number of faces should be the sum of each $i$-gon faces.
+\end{proof}
+
+So we then proceed \textbf{the proof of the original statement}.
+
+\begin{proof}
+    We will divide the case on whether $G$ is a connected graph or not.
+    \begin{itemize} 
+    \item $G$ is a \textbf{connected} graph: Since $G$ is a connected planar graph, we see that it satisfy the \textbf{Euler's Equation} as follows:
+    \begin{equation}
+        \label{eq7}
+        \#F - \#E + \#V = 2 \\
+    \end{equation}
+
+    \quad Since $G$ is a triangle-free graph, in particular it contains no triangle faces, we see that by \textbf{Lemma} \ref{lem3}, we have:
+    \begin{equation}
+    \begin{aligned}
+    \sum_{i=3}^{n}iF_i &= 2\#E \\
+    \implies \sum_{i=4}^{n}iF_i &= 2\#E \\
+    \end{aligned}
+    \label{eq8}
+    \end{equation}
+    
+
+    \quad and:
+    \begin{equation}
+    \begin{aligned}
+        \sum_{i=3}^{n}F_i &= \#F \\
+    \implies \sum_{i=4}^{n}F_i &= \#F \\
+    \end{aligned}
+    \label{eq9}
+    \end{equation}
+
+    \quad By \textbf{Equation} \ref{eq8}, we see that:
+    \[
+    \begin{aligned}
+        2\#E = \sum_{i=4}^{n}iF_i &\geq 4 \sum_{i=4}^{n} F_i \\
+        &= 4 \#F
+    \end{aligned}
+    \]
+
+    \quad By \textbf{Equation} \ref{eq7}, we see that:
+    \[
+    \begin{aligned}
+        2\#E &\geq 4\#F \\
+        &= 4(\#E - \#V + 2) \\
+        &= 4(\#E - n + 2) \\
+    \iff \#E &\leq 2n-4
+    \end{aligned}
+    \]
+
+    \item $G$ is \textbf{not a connected} graph: If $G$ is not a connected planar graph, then for each connected component, we add one edge to connect all the connected component back to form a connected planar graph $G'$. Suppose that we add in total $c > 0$ edges to create such graph $G'$. Then we can apply our previous result and conclude that:
+    \[
+    \begin{aligned}
+        E(G') &= E(G) + c \leq 2n-4 \\
+        \implies E(G) &\leq 2n - 4 - c \leq 2n - 4 \\
+    \end{aligned}
+    \]
+
+    \quad where $E(G)$ and $E(G')$ denotes the total edges in the graph $G$ and $G'$ respectively. So we then see that in this situation: 
+    \[
+        \# E \leq 2n-4 \\
+    \]
+
+    \quad still holds.
+    \end{itemize}
+    \quad So we successfully prove the original statement!
+\end{proof}
+\end{solution}
+\end{questions}

@@ -1,0 +1,46 @@
+\begin{questions}
+    \begin{problem}
+        Describe a bijective correspondence between symmetric Latin squares of order $n$ in which all symbols appear on the main diagonal and symmetric Latin squares of order $n + 1$ with all $(n + 1)$’s on the diagonal.
+    \end{problem}
+
+    \begin{solution}
+        \begin{proof}
+            We denote $L_{(n+1) \times (n+1)} :=$ \{the symmetric Latin squares of order $n+1$ with all $(n+1)$'s on the diagonal\}, and $L_{n\times n} :=$ \{the symmetric Latin squares of order $n$ in which all symbols appear on the main diagonal\}. For a specific Latin square $l$, we denote the element on its $i$ row and $j$ column as $l(i,j)$.
+
+            \quad We now define a map $\varphi$ as following:
+            \[
+            \begin{aligned}
+                \varphi : L_{(n+1) \times (n+1)} &\longrightarrow L_{n\times n} \\
+                l & \mapsto \varphi (l)
+            \end{aligned}
+            \]
+
+            such that 
+            \[
+            \varphi (l) (i,j) := 
+            \begin{cases}
+                l(i,n+1), \text{ if } i = j \\
+                l(i,j), \text{ otherwise} \\
+            \end{cases}
+            \qquad \forall \; i,j \in [1,n] \cap \mathbb Z
+            \]
+
+            \quad We shall then check this function is actually well-defined and be a bijection, thus finish the proof.
+            \begin{enumerate}
+                \item $\boldsymbol{\varphi}$ \textbf{is well-defined}: we shall check that $\varphi (l)$ is indeed a $n\times n$ symmetric Latin square where all the diagonal elements are different. One shall see that $\varphi(l)$ is a $n\times n$ square, and since we inherit every elements from $l$ except from the diagonal elements and we don't include the elements from $n+1$ row and $n+1$ columns, we see since $l$ is a symmetric Latin square, $\varphi(l)$ will still be a symmetric square. Now consider the $i$-th row of $\varphi(l)$ its element set will be $\{l(i,j)\; | \; j \in [1,n] \cap \mathbb Z,\; j \neq i\} \cup \{l(i,n+1)\}$. In the original Latin square $l$, its $i$-th row $\{l(i,j) \; | \; j \in [1,n+1] \cap \mathbb Z\}$ will be a permutation of $\{1,\ldots,n+1\}$, since $l(i,i) = n+1$, then we see $\{l(i,j) \; | \; j \in [1,n+1] \cap \mathbb Z, \; j \neq i\} = \{1,\ldots,n\}$, which is exactly the element set of the $i$-th row of $\varphi(l)$. And similarly we can have the same results for any $j$-th column of $\varphi(l)$. So for $\varphi(l)(i,j) = x$, $i,x$ fixed unique $j$ and $j,x$ fixed unique $i$. This leads to $\varphi(l)$ will be a $n \times n$ symmetric Latin square which all symbols appear on the main diagonal. $\longrightarrow$ \textbf{OK!}
+                \item $\boldsymbol{\varphi}$ \textbf{is injective}: Given $\varphi(l_1) = \varphi(l_2)$, we want to see that $l_1 = l_2 \in L_{(n+1) \times (n+1)}$, and we can reason it be contraposition, which is: if $l_1 \neq l_2$, we see $\varphi (l_1) \neq \varphi(l_2)$. If $l_1 \neq l_2$, this means that $l_1(i,j) \neq l_2 (i,j)$ for some $i,j \in [1,n+1] \cap \mathbb Z$. Because of symmetry, we only consider the situation where $i,j \in [1,n+1] \cap \mathbb Z, i<j$. When $j=(n+1)$, we see $l_1 (i,n+1) \neq l_2(i,n+1) \implies \varphi(l_1)(i,i) \neq \varphi(l_2)(i,i) \implies \varphi(l_1) \neq \varphi(l_2)$. If $j \neq (n+1)$, we see $l_1(i,j) \neq l_2(i,j) \implies \varphi(l_1)(i,j) \neq \varphi (l_2)(i,j) \implies \varphi(l_1) \neq \varphi(l_2)$. $\longrightarrow$ \textbf{OK!}
+                \item $\boldsymbol{\varphi}$ \textbf{is surjective}: Given $L\in L_{n\times n}$, we can construct a new Latin square $l$ based on the following rules: 
+                \begin{itemize}
+                    \item the new Latin square will be of size $(n+1) \times (n+1)$.
+                    \item $l(i,i) = n+1, \; \forall i \in [1,n+1] \cap \mathbb Z$.
+                    \item $l(i,j) = L(i,j), \; \forall i,j \in [1,n] \cap \mathbb Z, i\neq j$.
+                    \item $l(i, n+1) = L(i,i), \; \forall i \in [1,n] \cap \mathbb Z$, $l(n+1,j) = L(j,j), \; \forall j \in [1,n] \cap \mathbb Z$
+                \end{itemize}
+                
+                Following similar pattern as we have reasoning in the way that $\varphi$ is well-defined, we see that $l \in L_{(n+1) \times (n+1)}$, moreover, we see that $\varphi(l) = L$. So we see any $L \in L_{n\times n}$, there exists $l \in L_{(n+1) \times (n+1)}$, s.t. $\varphi(l) = L$, leading to surjectivity of $\varphi$. $\longrightarrow$ \textbf{OK!}
+            \end{enumerate}
+
+            So we find such $\varphi$ that is bijective, \textbf{Q.E.D.}
+        \end{proof}
+    \end{solution}
+\end{questions}

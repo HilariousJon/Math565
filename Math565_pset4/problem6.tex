@@ -1,0 +1,24 @@
+\begin{questions}
+    \begin{problem}
+        Prove that the Fano plane cannot be embedded in the Euclidean plane, that is, one cannot find $7$ points and $7$ lines in $\mathbb R^2$ with three points in each line, three lines through each point, and such that each pair of lines intersect at one of the points, and each pair of points lies on one of the lines.
+        \label{pb1}
+    \end{problem}
+
+    \begin{lemma}
+        Every finite set of points in the Euclidean plane has a line that passes through exactly two of the points or a line that passes through all of them. A line that contains exactly two of a set of points is known as an \textit{ordinary line}.
+        \label{lem1}
+    \end{lemma}
+    \begin{solution}
+        We shall first give proof to \textbf{Lemma} \ref{lem1}
+        \begin{proof}
+            Given a finite point set $S$, if all points in $S$ lies on a common line, then we are done. Now suppose that not all points in $S$ are collinear. Now define a connecting line to be a line that passing through at least 2 of the points in $S$. Since $S$ is a finite set, then there must exists a point $p$ and a connecting line $l$, with positive distance apart, such that no other point-line pair has smaller distance between them. We want to see that $l$ is actually the intended ordinary line.
+
+            \quad Suppose that $l$ is not an ordinary line, then there must exists three point of $S$, such that they all lie on the common line $l$. Denote them as $\{a,b,c\}$. We now draw the perpendicular projection of $p$ to $l$, denoted as $p'$. Then by pigeonhole principle, at least $2$ of the points $\{a,b,c\}$ will lie on the same side of $p'$, say, $a,b$. And consider $b$ to be the point that goes closer to $p'$, and possibly coincide with $p'$. And now give the connecting line $l'$ that passing through $p$ and $a$, namely, $\overline{pa} = l'$, we see that the distance between the point pair $b$ and $l'$ is smaller than the distance between the original smallest-distanced point pair $p$ and $l$, since if we draw the perpendicular projection of $b$ onto $l'$, denoted as $p''$, we see that $\triangle bap''$ is fully contained in $\triangle app'$ with common vertex $a$, and thus $p''b < pp'$, leading to contradiction $\lightning$. So we find $l$ as such ordinary line. \textbf{Q.E.D.}
+        \end{proof}
+
+        We then shall give the proof of the \textbf{Original Statement}.
+        \begin{proof}
+            Suppose that Fano plane $(X, \mathcal L)$ can be embedded in the Euclidean plane, we see such embedding gives us a finite points set. But then clearly in such embedding we cannot find a line passing through exactly $2$ points by definition of Fano plane (In a Fano plane, there are three points on every line), which contradict to our \textbf{Lemma} \ref{lem1} $\lightning$. So we see Fano plane cannot be embedded in the Euclidean plane. \textbf{Q.E.D.}
+        \end{proof}
+    \end{solution}
+\end{questions}

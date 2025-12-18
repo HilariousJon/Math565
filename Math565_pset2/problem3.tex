@@ -1,0 +1,27 @@
+\begin{questions}
+    \begin{problem}
+Let $m$ be given. Show that if $n$ is large enough, every $n\times n$ $(0, 1)$-matrix has a principal submatrix of size m (i.e., a submatrix obtained by removing $n-m$ rows and the same $n-m$ columns), in which all the elements below the diagonal are the same, and all the elements above the diagonal are the same.
+    \end{problem}
+
+\begin{solution}
+    \begin{proof}
+    We shall show that when $n > N(N(m,m;2), N(m,m;2);2)$, we will have our intended submatrix exists.
+    
+    \quad We can let $M$ be such $n\times n$ $(0,1)$-matrix. And such $M$ will defined a colored complete graph $K_n$ with vertices labeled as $\{1,\ldots,n\}$ by the following rules:
+    \begin{itemize}
+        \item If $i<j$ for $i,j \in [1,n] \cap \mathbb Z$, color the edge red if $M_{ij} = 1$.
+        \item Otherwise, color the edge blue if $M_{ij} = 0$.
+    \end{itemize}
+
+    \quad By \textbf{Ramsey's Theorem}, since $n > N(N(m,m;2), N(m,m;2);2)$, there exists a monocromatic subgraph $K_{N(m,m;2)}$ with $N(m,m;2)$ vertices. Then we see the submatrix $M'$ induced by this subgraph is either attains its upper triangular matrix attains all entries to be the same value or the lower triangular matrix attains all entries to be the same value.
+
+    \quad We now put our attention to these $N(m,m;2) \times N(m,m;2)$ matrix. We shall defined a new coloring rules on $K_{N(m,m;2)}$ induced by this matrix as follows:
+    \begin{itemize}
+        \item If $i<j$ for $i,j \in [1,N(m,m;2)] \cap \mathbb Z$, color the edge red if $M_{ji}=1$.
+        \item Otherwise, color the edge blue if $M_{ji}=0$.
+    \end{itemize}
+
+    \quad By \textbf{Ramsey's Theorem}, since $n> N(m,m;2)$, there exists a monocromatic subgraph $K_{m}$ with $m$ vertices, and we shall see that submatrix $M''$induced by this subgraph attains all elements below the diagonal are the same and all the elements above the diagonal are the same by definition of our coloring rule, and such $M''$ is a principal submatrix of $M'$ and $M'$ is a principal submatrix of $M$, thus $M''$ will be a $m\times m$ principal submatrix of $M$ which is intended. So we have done our proof.
+    \end{proof}
+\end{solution}
+\end{questions}
